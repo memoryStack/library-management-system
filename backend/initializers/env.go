@@ -9,24 +9,20 @@ import (
 	"github.com/joho/godotenv"
 )
 
-// Environment names must match suffix of .env.<name> files.
+// Environment names must match the suffix of .env.<name> files.
 const (
 	EnvDevelopment = "development"
 	EnvProduction  = "production"
 )
 
-// LoadEnv loads `.env.<environment>` from the process working directory (or BACKEND_ROOT if set).
+// LoadEnv loads `.env.<environment>` from the current working directory.
 func LoadEnv(environment string) error {
-	root := os.Getenv("BACKEND_ROOT")
-	if root == "" {
-		wd, err := os.Getwd()
-		if err != nil {
-			return fmt.Errorf("get working directory: %w", err)
-		}
-		root = wd
+	wd, err := os.Getwd()
+	if err != nil {
+		return fmt.Errorf("get working directory: %w", err)
 	}
 
-	filename := filepath.Join(root, fmt.Sprintf(".env.%s", environment))
+	filename := filepath.Join(wd, fmt.Sprintf(".env.%s", environment))
 	if err := godotenv.Load(filename); err != nil {
 		return fmt.Errorf("load %s: %w", filename, err)
 	}

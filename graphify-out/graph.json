@@ -16,7 +16,7 @@
       "label": "init()",
       "file_type": "code",
       "source_file": "main.go",
-      "source_location": "L17",
+      "source_location": "L18",
       "id": "backend_main_init",
       "community": 0,
       "norm_label": "init()"
@@ -25,7 +25,7 @@
       "label": "main()",
       "file_type": "code",
       "source_file": "main.go",
-      "source_location": "L41",
+      "source_location": "L42",
       "id": "backend_main_main",
       "community": 1,
       "norm_label": "main()"
@@ -43,7 +43,7 @@
       "label": "Stack()",
       "file_type": "code",
       "source_file": "middlewares/middlewares.go",
-      "source_location": "L23",
+      "source_location": "L21",
       "id": "middlewares_middlewares_stack",
       "community": 1,
       "norm_label": "stack()"
@@ -103,22 +103,40 @@
       "norm_label": "loadenv()"
     },
     {
+      "label": "db.go",
+      "file_type": "code",
+      "source_file": "initializers/db.go",
+      "source_location": "L1",
+      "id": "initializers_db_go",
+      "community": 0,
+      "norm_label": "db.go"
+    },
+    {
+      "label": "ConnectDB()",
+      "file_type": "code",
+      "source_file": "initializers/db.go",
+      "source_location": "L17",
+      "id": "initializers_db_connectdb",
+      "community": 0,
+      "norm_label": "connectdb()"
+    },
+    {
       "label": "database.go",
       "file_type": "code",
       "source_file": "initializers/database.go",
       "source_location": "L1",
-      "id": "initializers_database_go",
-      "community": 0,
-      "norm_label": "database.go"
+      "community": 4,
+      "norm_label": "database.go",
+      "id": "initializers_database_go"
     },
     {
       "label": "ConnectDB()",
       "file_type": "code",
       "source_file": "initializers/database.go",
       "source_location": "L18",
-      "id": "initializers_database_connectdb",
-      "community": 0,
-      "norm_label": "connectdb()"
+      "community": 4,
+      "norm_label": "connectdb()",
+      "id": "initializers_database_connectdb"
     }
   ],
   "links": [
@@ -128,9 +146,9 @@
       "source_file": "main.go",
       "source_location": "L17",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "main_go",
-      "target": "backend_main_init",
-      "confidence_score": 1.0
+      "target": "backend_main_init"
     },
     {
       "relation": "contains",
@@ -138,9 +156,9 @@
       "source_file": "main.go",
       "source_location": "L41",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "main_go",
-      "target": "backend_main_main",
-      "confidence_score": 1.0
+      "target": "backend_main_main"
     },
     {
       "relation": "calls",
@@ -152,6 +170,17 @@
       "weight": 1.0,
       "source": "backend_main_init",
       "target": "initializers_env_loadenv"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "main.go",
+      "source_location": "L37",
+      "weight": 1.0,
+      "source": "backend_main_init",
+      "target": "initializers_db_connectdb"
     },
     {
       "relation": "calls",
@@ -181,9 +210,9 @@
       "source_file": "middlewares/middlewares.go",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "middlewares_middlewares_go",
-      "target": "middlewares_middlewares_stack",
-      "confidence_score": 1.0
+      "target": "middlewares_middlewares_stack"
     },
     {
       "relation": "contains",
@@ -191,9 +220,9 @@
       "source_file": "controllers/health.go",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "controllers_health_go",
-      "target": "controllers_health_health",
-      "confidence_score": 1.0
+      "target": "controllers_health_health"
     },
     {
       "relation": "contains",
@@ -201,9 +230,9 @@
       "source_file": "helpers/response.go",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "helpers_response_go",
-      "target": "helpers_response_jsonerror",
-      "confidence_score": 1.0
+      "target": "helpers_response_jsonerror"
     },
     {
       "relation": "contains",
@@ -211,8 +240,18 @@
       "source_file": "initializers/env.go",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "initializers_env_go",
-      "target": "initializers_env_loadenv",
+      "target": "initializers_env_loadenv"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "initializers/db.go",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "initializers_db_go",
+      "target": "initializers_db_connectdb",
       "confidence_score": 1.0
     },
     {
@@ -221,9 +260,9 @@
       "source_file": "initializers/database.go",
       "source_location": "L18",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "initializers_database_go",
-      "target": "initializers_database_connectdb",
-      "confidence_score": 1.0
+      "target": "initializers_database_connectdb"
     }
   ],
   "hyperedges": []
