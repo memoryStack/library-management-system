@@ -1,0 +1,26 @@
+{
+  "/Users/admin/go/src/library-management-system/backend/main.go": {
+    "mtime": 1778350094.2491453,
+    "hash": "83209538765c697848b3106001d30ad6"
+  },
+  "/Users/admin/go/src/library-management-system/backend/middlewares/middlewares.go": {
+    "mtime": 1778350265.090645,
+    "hash": "12f4713cb6f24f61f44f4b3c036d6516"
+  },
+  "/Users/admin/go/src/library-management-system/backend/controllers/health.go": {
+    "mtime": 1778350078.2576425,
+    "hash": "b891a58c2ab08e598e73f5f062d51106"
+  },
+  "/Users/admin/go/src/library-management-system/backend/helpers/response.go": {
+    "mtime": 1778350078.4193575,
+    "hash": "2bc648b2b6115f455d130e8da4be0cc4"
+  },
+  "/Users/admin/go/src/library-management-system/backend/initializers/env.go": {
+    "mtime": 1778350073.923761,
+    "hash": "2ddfd6808a9d21ffac7433211642f50f"
+  },
+  "/Users/admin/go/src/library-management-system/backend/initializers/database.go": {
+    "mtime": 1778350075.8828168,
+    "hash": "7bdcc5d64501ddf47c1e880690c9cfa1"
+  }
+}
