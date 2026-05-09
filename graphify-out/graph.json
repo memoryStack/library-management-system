@@ -250,9 +250,9 @@
       "source_file": "initializers/db.go",
       "source_location": "L17",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "initializers_db_go",
-      "target": "initializers_db_connectdb",
-      "confidence_score": 1.0
+      "target": "initializers_db_connectdb"
     },
     {
       "relation": "contains",
