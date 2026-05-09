@@ -22,10 +22,10 @@ func ConnectDB(environment string) error {
 
 	cfg := &gorm.Config{}
 	switch environment {
-	case EnvDevelopment:
-		cfg.Logger = logger.Default.LogMode(logger.Info)
-	default:
-		cfg.Logger = logger.Default.LogMode(logger.Error)
+		case EnvDevelopment:
+			cfg.Logger = logger.Default.LogMode(logger.Info)
+		default:
+			cfg.Logger = logger.Default.LogMode(logger.Error)
 	}
 
 	sqlDB, err := gorm.Open(postgres.Open(dsn), cfg)
