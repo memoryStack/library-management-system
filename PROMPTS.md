@@ -42,7 +42,16 @@ Two modes: **development** and **production**, with different DB (and related) s
 
 ---
 
+## Prompt 3 — Committed env files and sharing with other developers
+
+Because `initializers/env.go` loads `.env.development` or `.env.production`, create those files (not only `.env.{env}.example`) with everything the app needs.
+
+Also: those filenames were listed in `backend/.gitignore`; the goal is to **share** them with other developers. Is committing them (instead of only examples) a good practice?
+
+---
+
 ## How this maps to the code
 
 - **Prompt 1** → `backend/` module (Fiber, GORM, godotenv, Makefile target for CompileDaemon, `controllers`, `helpers`, `initializers`, `models`, `middlewares`, `main.go`, `.env.development` / `.env.production` pattern).  
-- **Prompt 2** → This file (`PROMPTS.md`) plus reduced env surface and stricter startup rules in `backend` (see comments in `main.go` and `initializers`).
+- **Prompt 2** → This file (`PROMPTS.md`) plus reduced env surface and stricter startup rules in `backend` (see comments in `main.go` and `initializers`).  
+- **Prompt 3** → Tracked `backend/.env.development` and `backend/.env.production` with the required variables and comments; removed those paths from `backend/.gitignore`; dropped the separate `.example` files so there is one source of truth. Production file uses placeholders—real secrets should not be pushed (especially to a public repo).
