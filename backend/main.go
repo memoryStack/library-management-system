@@ -54,6 +54,8 @@ func main() {
 
 	app.Get("/health", controllers.Health)
 
+	app.Post("/book", controllers.CreateBook)
+
 	addr := strings.TrimSpace(os.Getenv("SERVER_ADDR"))
 	if addr == "" {
 		if runEnv == initializers.EnvProduction {
