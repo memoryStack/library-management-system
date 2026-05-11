@@ -8,6 +8,21 @@ import (
 	"library-management-system/backend/models"
 )
 
+func GetBook(c *fiber.Ctx) error {
+	var book models.Book
+	result := initializers.DB.First(&book, c.Params("id"))	
+	if result.Error != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"error": result.Error.Error(),
+		})
+	}
+
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"message": "Book fetched successfully",
+		"book": book,
+	})
+}
+
 func CreateBook(c *fiber.Ctx) error {
 	fmt.Println("Creating book")
 	// book := c.Bind()
