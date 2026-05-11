@@ -56,6 +56,7 @@ func main() {
 
 	// book routes
 	app.Get("/book/:id", controllers.GetBook)
+	app.Get("/books", controllers.GetAllBooks)
 	app.Post("/book", controllers.CreateBook)
 	app.Delete("/book/:id", controllers.DeleteBook)
 

@@ -23,6 +23,21 @@ func GetBook(c *fiber.Ctx) error {
 	})
 }
 
+func GetAllBooks(c *fiber.Ctx) error {
+	var books []models.Book
+	result := initializers.DB.Find(&books)
+	if result.Error != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"error": result.Error.Error(),
+		})
+	}
+
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"message": "All books fetched successfully",
+		"books": books,
+	})
+}
+
 func CreateBook(c *fiber.Ctx) error {
 	fmt.Println("Creating book")
 	// book := c.Bind()
