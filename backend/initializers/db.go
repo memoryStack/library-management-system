@@ -51,5 +51,5 @@ func ConnectDB(environment string) error {
 
 func SyncDB() error {
 	// to create/sync the tables in the database
-	return DB.AutoMigrate(&models.Book{})
+	return DB.AutoMigrate(&models.Book{}, &models.Author{})
 }

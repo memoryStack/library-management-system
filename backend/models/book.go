@@ -3,7 +3,6 @@ package models
 import "gorm.io/gorm"
 
 type Book struct {
-	gorm.Model
 	Title string `json:"title" gorm:"not null"`
 	Author string `json:"author" gorm:"not null"`
 	ISBN string `json:"isbn" gorm:"not null;unique"`
@@ -14,4 +13,5 @@ type Book struct {
 	Description string `json:"description" gorm:"not null"`
 	ImageURL string `json:"image_url" gorm:"not null"`
 	RelatedImages []string `json:"related_images" gorm:"type:jsonb;serializer:json"`
+	gorm.Model
 }
