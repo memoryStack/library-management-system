@@ -9,6 +9,8 @@ import (
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
+
+	"library-management-system/backend/models"
 )
 
 var DB *gorm.DB
@@ -45,4 +47,9 @@ func ConnectDB(environment string) error {
 	DB = sqlDB
 	log.Println("database connection established")
 	return nil
+}
+
+func SyncDB() error {
+	// to create/sync the tables in the database
+	return DB.AutoMigrate(&models.Book{})
 }

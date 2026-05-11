@@ -37,6 +37,9 @@ func init() {
 	if err := initializers.ConnectDB(runEnv); err != nil {
 		log.Fatalf("database: %v", err)
 	}
+	if err := initializers.SyncDB(); err != nil {
+		log.Fatalf("database sync: %v", err)
+	}
 }
 
 func main() {
