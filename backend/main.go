@@ -54,7 +54,9 @@ func main() {
 
 	app.Get("/health", controllers.Health)
 
+	// book routes
 	app.Post("/book", controllers.CreateBook)
+	app.Delete("/book/:id", controllers.DeleteBook)
 
 	addr := strings.TrimSpace(os.Getenv("SERVER_ADDR"))
 	if addr == "" {

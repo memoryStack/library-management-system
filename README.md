@@ -21,3 +21,8 @@ ANS - https://chat.deepseek.com/a/chat/s/9bce0279-1e6b-4564-b9d5-82f9b7f048eb
 
         GORM + Postgres driver docs:
         https://gorm.io/docs/connecting_to_the_database.html#PostgreSQL
+
+3. why GORM soft deletes entries by default ?
+    in this exercise i deleted a book and noticed that it's deleted_at column is updated, that's it.
+    i checked in PgAdmin that the entry is still present. so below is the answer for the WHYs & HOWs.
+    https://chat.deepseek.com/a/chat/s/8c1e69a6-7822-4e9a-8286-b648f4ee6656

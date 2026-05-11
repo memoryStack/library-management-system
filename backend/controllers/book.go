@@ -31,3 +31,16 @@ func CreateBook(c *fiber.Ctx) error {
 		"book": book,
 	})
 }
+
+func DeleteBook(c *fiber.Ctx) error {
+	result := initializers.DB.Delete(&models.Book{}, c.Params("id"))
+	if result.Error != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"error": result.Error.Error(),
+		})
+	}
+
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"message": "Book deleted successfully",
+	})
+}
