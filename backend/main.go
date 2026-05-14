@@ -62,7 +62,7 @@ func main() {
 	app.Get("/api/auth/login", controllers.AuthLogin)
 	app.Get("/api/auth/callback", controllers.AuthCallback)
 	app.Post("/api/auth/refresh", controllers.AuthRefresh)
-	app.Post("/api/auth/logout", controllers.AuthLogout)
+	app.Get("/api/auth/logout", controllers.AuthLogout)
 
 	app.Get("/api/auth/me", middlewares.RequireAuth, controllers.AuthMe)
 	protected := app.Group("", middlewares.RequireAuth)
