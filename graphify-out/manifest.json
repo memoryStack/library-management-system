@@ -1,15 +1,63 @@
 {
   "/Users/admin/go/src/library-management-system/backend/main.go": {
-    "mtime": 1778352542.7950668,
-    "hash": "e3a5638c11a76d1eeddc54bfc38d1383"
+    "mtime": 1778673185.7656696,
+    "hash": "cbc70e19d59e6637acd652ed48a7155b"
+  },
+  "/Users/admin/go/src/library-management-system/backend/auth/config.go": {
+    "mtime": 1778634393.6949065,
+    "hash": "1f69b9d595b1684d031af6f39efe825a"
+  },
+  "/Users/admin/go/src/library-management-system/backend/auth/cookies.go": {
+    "mtime": 1778727908.1946268,
+    "hash": "2d78402587793aaf65d8147bf200b21e"
+  },
+  "/Users/admin/go/src/library-management-system/backend/auth/context.go": {
+    "mtime": 1778727907.279228,
+    "hash": "344553541a6204ad906c44aaa081b85e"
+  },
+  "/Users/admin/go/src/library-management-system/backend/auth/jwt.go": {
+    "mtime": 1778694254.8481193,
+    "hash": "f49c5ee28f55a399087f8a6a8ff616e0"
+  },
+  "/Users/admin/go/src/library-management-system/backend/auth/oauth.go": {
+    "mtime": 1778662904.4088445,
+    "hash": "4a13fe50f6a899038c2f3c7bac360ffe"
+  },
+  "/Users/admin/go/src/library-management-system/backend/auth/init.go": {
+    "mtime": 1778634300.1822932,
+    "hash": "00600a2ed08842f45622ce704eb37ea1"
+  },
+  "/Users/admin/go/src/library-management-system/backend/middlewares/auth.go": {
+    "mtime": 1778727911.8616521,
+    "hash": "abfd23173266b206f021ec31af832dd3"
   },
   "/Users/admin/go/src/library-management-system/backend/middlewares/middlewares.go": {
-    "mtime": 1778352541.4666872,
-    "hash": "6094dd3ca5c14e9a257421dc3446bb33"
+    "mtime": 1778634372.9958482,
+    "hash": "3089e77e63f21047245802f1c24d877a"
+  },
+  "/Users/admin/go/src/library-management-system/backend/models/user.go": {
+    "mtime": 1778669161.7927842,
+    "hash": "60c3b0ce489671b5f2a4ecb8477bef4f"
+  },
+  "/Users/admin/go/src/library-management-system/backend/models/author.go": {
+    "mtime": 1778634393.6945837,
+    "hash": "11b865ce81eb145b98b2d510432c5275"
+  },
+  "/Users/admin/go/src/library-management-system/backend/models/book.go": {
+    "mtime": 1778634393.6944358,
+    "hash": "aea1dccc3e36c3661a5f381223f7236a"
+  },
+  "/Users/admin/go/src/library-management-system/backend/controllers/auth.go": {
+    "mtime": 1778727916.380159,
+    "hash": "2ea0013e93be39a00567077511ee4189"
   },
   "/Users/admin/go/src/library-management-system/backend/controllers/health.go": {
     "mtime": 1778350078.2576425,
     "hash": "b891a58c2ab08e598e73f5f062d51106"
+  },
+  "/Users/admin/go/src/library-management-system/backend/controllers/book.go": {
+    "mtime": 1778634393.6947994,
+    "hash": "307c091130296bd540b8bbf70660a5f4"
   },
   "/Users/admin/go/src/library-management-system/backend/helpers/response.go": {
     "mtime": 1778350078.4193575,
@@ -20,8 +68,12 @@
     "hash": "cbb131db8453f609e9b1df9ebd97f4d7"
   },
   "/Users/admin/go/src/library-management-system/backend/initializers/db.go": {
-    "mtime": 1778353905.498798,
-    "hash": "d3d6f836529689b859e84177ded6c149"
+    "mtime": 1778664441.0626345,
+    "hash": "2dda011e1515c411c19a05a04decf7ed"
+  },
+  "/Users/admin/go/src/library-management-system/README.md": {
+    "mtime": 1778634455.1549277,
+    "hash": "099437dbfe64469f563147a9813ac6f5"
   },
   "/Users/admin/go/src/library-management-system/PROMPTS.md": {
     "mtime": 1778353904.2311473,

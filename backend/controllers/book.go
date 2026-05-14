@@ -10,7 +10,7 @@ import (
 
 func GetBook(c *fiber.Ctx) error {
 	var book models.Book
-	result := initializers.DB.First(&book, c.Params("id"))	
+	result := initializers.DB.First(&book, c.Params("id"))
 	if result.Error != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"error": result.Error.Error(),
@@ -19,7 +19,7 @@ func GetBook(c *fiber.Ctx) error {
 
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"message": "Book fetched successfully",
-		"book": book,
+		"book":    book,
 	})
 }
 
@@ -34,7 +34,7 @@ func GetAllBooks(c *fiber.Ctx) error {
 
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"message": "All books fetched successfully",
-		"books": books,
+		"books":   books,
 	})
 }
 
@@ -58,7 +58,7 @@ func CreateBook(c *fiber.Ctx) error {
 
 	return c.Status(fiber.StatusCreated).JSON(fiber.Map{
 		"message": "Book created successfully",
-		"book": book,
+		"book":    book,
 	})
 }
 

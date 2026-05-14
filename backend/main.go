@@ -1,11 +1,13 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"log"
 	"os"
 	"strings"
 
+	"library-management-system/backend/auth"
 	"library-management-system/backend/controllers"
 	"library-management-system/backend/initializers"
 	"library-management-system/backend/middlewares"
@@ -31,6 +33,9 @@ func init() {
 	if err := initializers.LoadEnv(runEnv); err != nil {
 		log.Fatalf("env: %v", err)
 	}
+	if err := auth.Init(context.Background()); err != nil {
+		log.Fatalf("auth: %v", err)
+	}
 	if runEnv == initializers.EnvProduction && strings.TrimSpace(os.Getenv("CORS_ALLOW_ORIGINS")) == "" {
 		log.Fatal("CORS_ALLOW_ORIGINS must be set in .env.production (comma-separated origins, e.g. https://app.example.com)")
 	}
@@ -54,11 +59,17 @@ func main() {
 
 	app.Get("/health", controllers.Health)
 
-	// book routes
-	app.Get("/book/:id", controllers.GetBook)
-	app.Get("/books", controllers.GetAllBooks)
-	app.Post("/book", controllers.CreateBook)
-	app.Delete("/book/:id", controllers.DeleteBook)
+	app.Get("/api/auth/login", controllers.AuthLogin)
+	app.Get("/api/auth/callback", controllers.AuthCallback)
+	app.Post("/api/auth/refresh", controllers.AuthRefresh)
+	app.Post("/api/auth/logout", controllers.AuthLogout)
+
+	app.Get("/api/auth/me", middlewares.RequireAuth, controllers.AuthMe)
+	protected := app.Group("", middlewares.RequireAuth)
+	protected.Get("/book/:id", controllers.GetBook)
+	protected.Get("/books", controllers.GetAllBooks)
+	protected.Post("/book", controllers.CreateBook)
+	protected.Delete("/book/:id", controllers.DeleteBook)
 
 	addr := strings.TrimSpace(os.Getenv("SERVER_ADDR"))
 	if addr == "" {

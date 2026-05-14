@@ -17,23 +17,44 @@ import (
 
 const handlerTimeout = 30 * time.Second
 
+func devCORSOrigins() []string {
+	raw := strings.TrimSpace(os.Getenv("AUTH0_CORS_ORIGINS"))
+	if raw == "" {
+		return []string{
+			"http://localhost:3000",
+			"http://localhost:5173",
+			"http://127.0.0.1:3000",
+			"http://127.0.0.1:5173",
+		}
+	}
+	var out []string
+	for _, p := range strings.Split(raw, ",") {
+		if t := strings.TrimSpace(p); t != "" {
+			out = append(out, t)
+		}
+	}
+	return out
+}
+
 // Stack returns middleware for the HTTP API. CORS policy depends on environment.
 func Stack(environment string) []fiber.Handler {
 	var corsMW fiber.Handler
+	corsHeaders := "Origin, Content-Type, Accept, Authorization, X-Request-ID, Cookie"
 	switch environment {
 	case initializers.EnvDevelopment:
+		origins := devCORSOrigins()
 		corsMW = cors.New(cors.Config{
-			AllowOrigins:     "*",
+			AllowOrigins:     strings.Join(origins, ","),
 			AllowMethods:     "GET,POST,PUT,PATCH,DELETE,OPTIONS",
-			AllowHeaders:     "Origin, Content-Type, Accept, Authorization, X-Request-ID",
-			AllowCredentials: false,
+			AllowHeaders:     corsHeaders,
+			AllowCredentials: true,
 		})
 	default:
 		origins := strings.TrimSpace(os.Getenv("CORS_ALLOW_ORIGINS"))
 		corsMW = cors.New(cors.Config{
 			AllowOrigins:     origins,
 			AllowMethods:     "GET,POST,PUT,PATCH,DELETE,OPTIONS",
-			AllowHeaders:     "Origin, Content-Type, Accept, Authorization, X-Request-ID",
+			AllowHeaders:     corsHeaders,
 			AllowCredentials: origins != "" && origins != "*",
 		})
 	}

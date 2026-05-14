@@ -26,3 +26,9 @@ ANS - https://chat.deepseek.com/a/chat/s/9bce0279-1e6b-4564-b9d5-82f9b7f048eb
     in this exercise i deleted a book and noticed that it's deleted_at column is updated, that's it.
     i checked in PgAdmin that the entry is still present. so below is the answer for the WHYs & HOWs.
     https://chat.deepseek.com/a/chat/s/8c1e69a6-7822-4e9a-8286-b648f4ee6656
+
+4. Auth0 + Fiber (OAuth2 authorization code, httpOnly cookies, JWKS JWT validation)
+   - Public: `GET /health`, `GET /api/auth/login`, `GET /api/auth/callback`, `POST /api/auth/refresh`, `POST /api/auth/logout`
+   - Auth required: `GET /api/auth/me`, all `/book(s)` routes
+   - Env: see `backend/.env.development` — especially `AUTH0_AUDIENCE` (must match an Auth0 API identifier) and `AUTH0_CORS_ORIGINS` (SPA origins; credentials mode).
+   - Auth0 docs: [Authorization Code Flow](https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow), [Call API using the Authorization Code Flow](https://auth0.com/docs/get-started/authentication-and-authorization-flow/call-your-api-using-the-authorization-code-flow-with-pkce), [Validate JSON Web Tokens](https://auth0.com/docs/secure/tokens/json-web-tokens/validate-json-web-tokens)
