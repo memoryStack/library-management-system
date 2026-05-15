@@ -3,8 +3,12 @@ package controllers
 import (
 	"crypto/rand"
 	"crypto/subtle"
+	"bytes"
+	"encoding/json"
 	"encoding/hex"
 	"fmt"
+	"io"
+	"net/http"
 	"strings"
 
 	"library-management-system/backend/auth"
@@ -87,6 +91,117 @@ func AuthLogin(c *fiber.Ctx) error {
 	return c.Redirect(auth.AuthorizeURL(cfg, state), fiber.StatusFound)
 }
 
+func AuthLoginSelfManaged(c *fiber.Ctx) error {
+
+	cfg := auth.PasswordlessConf
+	
+	url := "https://"+auth.PasswordlessConf.Domain+"/passwordless/start"
+	
+	requestPayload := map[string]string{
+		"client_id": cfg.ClientID,
+		"client_secret": cfg.ClientSecret,
+		"connection": c.Query("medium"),
+		"send": "code",
+	}
+
+	var requestBody map[string]string
+	if err := c.BodyParser(&requestBody); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"error": err.Error(),
+		})
+	}
+
+	if c.Query("medium") == "email" {
+		requestPayload["email"] = requestBody["email"]
+	} else {
+		// phone number with code
+		requestPayload["phone_number"] = requestBody["phone_number"]
+	}
+
+	jsonData, err := json.Marshal(requestPayload)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
+	}
+
+	resp, err := http.Post(url, "application/json", bytes.NewReader(jsonData))
+	defer resp.Body.Close()
+
+	if err != nil {
+        return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
+    }
+
+	_, err = io.ReadAll(resp.Body)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
+	}
+
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"message": "Passwordless login started",
+	})
+}
+
+type OTPConfirmResponse struct {
+	AccessToken string `json:"access_token"`
+	RefreshToken string `json:"refresh_token"`
+	IDToken string `json:"id_token"`
+	TokenType string `json:"token_type"`
+	ExpiresIn int `json:"expires_in"`
+	Scope string `json:"scope"`
+}
+
+func AuthConfirmOTP(c *fiber.Ctx) error {
+	cfg := auth.PasswordlessConf
+	
+	url := "https://"+auth.PasswordlessConf.Domain+"/oauth/token"
+	
+	var requestBody map[string]string
+	if err := c.BodyParser(&requestBody); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"error": err.Error(),
+		})
+	}
+	requestPayload := map[string]string{
+		"grant_type": "http://auth0.com/oauth/grant-type/passwordless/otp",
+		"client_id": cfg.ClientID,
+		"client_secret": cfg.ClientSecret,
+		"username": requestBody["username"],
+		"otp": requestBody["otp"],
+		"realm": c.Query("medium"),
+		"scope": "openid profile email offline_access",
+	}
+
+	jsonData, err := json.Marshal(requestPayload)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
+	}
+
+	resp, err := http.Post(url, "application/json", bytes.NewReader(jsonData))
+	defer resp.Body.Close()
+
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
+	}
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
+	}
+
+	var response OTPConfirmResponse
+	if err := json.Unmarshal(body, &response); err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
+	}
+
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"message": "Passwordless login confirmed",
+		"access_token": response.AccessToken,
+		"refresh_token": response.RefreshToken,
+		"id_token": response.IDToken,
+		"token_type": response.TokenType,
+		"expires_in": response.ExpiresIn,
+	})
+}
+
 // AuthCallback handles OAuth redirect from Auth0, exchanges the code, and sets httpOnly cookies.
 func AuthCallback(c *fiber.Ctx) error {
 	cfg := auth.GetAuthConfigs(c)
@@ -143,6 +258,7 @@ func AuthCallback(c *fiber.Ctx) error {
 }
 
 // AuthRefresh rotates the access token using the refresh token cookie.
+// TODO: this also needs to know which configs to pick up, passwordless or normal ones
 func AuthRefresh(c *fiber.Ctx) error {
 	cfg := auth.Conf
 	rt := strings.TrimSpace(c.Cookies(cfg.RefreshCookieName))

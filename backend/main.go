@@ -60,6 +60,8 @@ func main() {
 	app.Get("/health", controllers.Health)
 
 	app.Get("/api/auth/login", controllers.AuthLogin)
+	app.Post("/api/auth/login/self-managed", controllers.AuthLoginSelfManaged)
+	app.Post("/api/auth/confirm-otp/self-managed", controllers.AuthConfirmOTP)
 	app.Get("/api/auth/callback", controllers.AuthCallback)
 	app.Post("/api/auth/refresh", controllers.AuthRefresh)
 	app.Get("/api/auth/logout", controllers.AuthLogout)
