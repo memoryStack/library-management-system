@@ -18,7 +18,7 @@
       "source_file": "main.go",
       "source_location": "L20",
       "id": "backend_main_init",
-      "community": 3,
+      "community": 2,
       "norm_label": "init()"
     },
     {
@@ -36,35 +36,44 @@
       "source_file": "auth/config.go",
       "source_location": "L1",
       "id": "auth_config_go",
-      "community": 4,
+      "community": 3,
       "norm_label": "config.go"
     },
     {
       "label": "Config",
       "file_type": "code",
       "source_file": "auth/config.go",
-      "source_location": "L13",
+      "source_location": "L15",
       "id": "auth_config",
-      "community": 4,
+      "community": 3,
       "norm_label": "config"
     },
     {
       "label": "loadAuth0Config()",
       "file_type": "code",
       "source_file": "auth/config.go",
-      "source_location": "L41",
+      "source_location": "L43",
       "id": "auth_config_loadauth0config",
-      "community": 4,
+      "community": 3,
       "norm_label": "loadauth0config()"
     },
     {
       "label": "loadPasswordlessConfigOptional()",
       "file_type": "code",
       "source_file": "auth/config.go",
-      "source_location": "L157",
+      "source_location": "L155",
       "id": "auth_config_loadpasswordlessconfigoptional",
-      "community": 4,
+      "community": 3,
       "norm_label": "loadpasswordlessconfigoptional()"
+    },
+    {
+      "label": "GetAuthConfigs()",
+      "file_type": "code",
+      "source_file": "auth/config.go",
+      "source_location": "L162",
+      "id": "auth_config_getauthconfigs",
+      "community": 0,
+      "norm_label": "getauthconfigs()"
     },
     {
       "label": "cookies.go",
@@ -153,7 +162,7 @@
       "source_file": "auth/oauth.go",
       "source_location": "L1",
       "id": "auth_oauth_go",
-      "community": 2,
+      "community": 4,
       "norm_label": "oauth.go"
     },
     {
@@ -162,7 +171,7 @@
       "source_file": "auth/oauth.go",
       "source_location": "L15",
       "id": "auth_tokenresponse",
-      "community": 2,
+      "community": 4,
       "norm_label": "tokenresponse"
     },
     {
@@ -171,7 +180,7 @@
       "source_file": "auth/oauth.go",
       "source_location": "L24",
       "id": "auth_oauth_tokenendpoint",
-      "community": 2,
+      "community": 4,
       "norm_label": "tokenendpoint()"
     },
     {
@@ -180,43 +189,43 @@
       "source_file": "auth/oauth.go",
       "source_location": "L30",
       "id": "auth_oauth_dotokenform",
-      "community": 2,
+      "community": 4,
       "norm_label": "dotokenform()"
     },
     {
       "label": "ExchangeAuthorizationCode()",
       "file_type": "code",
       "source_file": "auth/oauth.go",
-      "source_location": "L67",
+      "source_location": "L64",
       "id": "auth_oauth_exchangeauthorizationcode",
-      "community": 2,
+      "community": 4,
       "norm_label": "exchangeauthorizationcode()"
     },
     {
       "label": "RefreshTokens()",
       "file_type": "code",
       "source_file": "auth/oauth.go",
-      "source_location": "L78",
+      "source_location": "L75",
       "id": "auth_oauth_refreshtokens",
-      "community": 2,
+      "community": 4,
       "norm_label": "refreshtokens()"
     },
     {
       "label": "AuthorizeURL()",
       "file_type": "code",
       "source_file": "auth/oauth.go",
-      "source_location": "L89",
+      "source_location": "L86",
       "id": "auth_oauth_authorizeurl",
-      "community": 2,
+      "community": 0,
       "norm_label": "authorizeurl()"
     },
     {
       "label": "LogoutURL()",
       "file_type": "code",
       "source_file": "auth/oauth.go",
-      "source_location": "L106",
+      "source_location": "L103",
       "id": "auth_oauth_logouturl",
-      "community": 2,
+      "community": 4,
       "norm_label": "logouturl()"
     },
     {
@@ -225,7 +234,7 @@
       "source_file": "auth/init.go",
       "source_location": "L1",
       "id": "auth_init_go",
-      "community": 4,
+      "community": 3,
       "norm_label": "init.go"
     },
     {
@@ -234,7 +243,7 @@
       "source_file": "auth/init.go",
       "source_location": "L11",
       "id": "auth_init_init",
-      "community": 4,
+      "community": 3,
       "norm_label": "init()"
     },
     {
@@ -522,7 +531,7 @@
       "source_file": "initializers/env.go",
       "source_location": "L1",
       "id": "initializers_env_go",
-      "community": 3,
+      "community": 2,
       "norm_label": "env.go"
     },
     {
@@ -531,7 +540,7 @@
       "source_file": "initializers/env.go",
       "source_location": "L19",
       "id": "initializers_env_loadenv",
-      "community": 3,
+      "community": 2,
       "norm_label": "loadenv()"
     },
     {
@@ -540,7 +549,7 @@
       "source_file": "initializers/db.go",
       "source_location": "L1",
       "id": "initializers_db_go",
-      "community": 3,
+      "community": 2,
       "norm_label": "db.go"
     },
     {
@@ -549,7 +558,7 @@
       "source_file": "initializers/db.go",
       "source_location": "L19",
       "id": "initializers_db_connectdb",
-      "community": 3,
+      "community": 2,
       "norm_label": "connectdb()"
     },
     {
@@ -558,7 +567,7 @@
       "source_file": "initializers/db.go",
       "source_location": "L52",
       "id": "initializers_db_syncdb",
-      "community": 3,
+      "community": 2,
       "norm_label": "syncdb()"
     },
     {
@@ -566,7 +575,7 @@
       "file_type": "code",
       "source_file": "auth/config.go",
       "source_location": "L33",
-      "community": 4,
+      "community": 3,
       "norm_label": "loadconfig()",
       "id": "auth_config_loadconfig"
     },
@@ -602,7 +611,7 @@
       "file_type": "code",
       "source_file": "initializers/database.go",
       "source_location": "L1",
-      "community": 3,
+      "community": 2,
       "norm_label": "database.go",
       "id": "initializers_database_go"
     },
@@ -611,7 +620,7 @@
       "file_type": "code",
       "source_file": "initializers/database.go",
       "source_location": "L18",
-      "community": 3,
+      "community": 2,
       "norm_label": "connectdb()",
       "id": "initializers_database_connectdb"
     }
@@ -708,9 +717,9 @@
       "source_file": "auth/config.go",
       "source_location": "L41",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "auth_config_go",
-      "target": "auth_config_loadauth0config",
-      "confidence_score": 1.0
+      "target": "auth_config_loadauth0config"
     },
     {
       "relation": "contains",
@@ -718,8 +727,18 @@
       "source_file": "auth/config.go",
       "source_location": "L157",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "auth_config_go",
-      "target": "auth_config_loadpasswordlessconfigoptional",
+      "target": "auth_config_loadpasswordlessconfigoptional"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "auth/config.go",
+      "source_location": "L162",
+      "weight": 1.0,
+      "source": "auth_config_go",
+      "target": "auth_config_getauthconfigs",
       "confidence_score": 1.0
     },
     {
@@ -739,9 +758,9 @@
       "source_file": "auth/config.go",
       "source_location": "L161",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "auth_config_loadpasswordlessconfigoptional",
-      "target": "auth_config_loadauth0config",
-      "confidence_score": 1.0
+      "target": "auth_config_loadauth0config"
     },
     {
       "relation": "calls",
@@ -764,6 +783,28 @@
       "weight": 1.0,
       "source": "auth_init_init",
       "target": "auth_config_loadpasswordlessconfigoptional"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "controllers/auth.go",
+      "source_location": "L79",
+      "weight": 1.0,
+      "source": "controllers_auth_authlogin",
+      "target": "auth_config_getauthconfigs"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "controllers/auth.go",
+      "source_location": "L92",
+      "weight": 1.0,
+      "source": "controllers_auth_authcallback",
+      "target": "auth_config_getauthconfigs"
     },
     {
       "relation": "contains",

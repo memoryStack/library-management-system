@@ -1,11 +1,11 @@
 {
   "/Users/admin/go/src/library-management-system/backend/main.go": {
-    "mtime": 1778757235.760695,
+    "mtime": 1778848736.9077802,
     "hash": "8e0a55c91fb9ba682620cbe0beb6cfe6"
   },
   "/Users/admin/go/src/library-management-system/backend/auth/config.go": {
-    "mtime": 1778821970.1162543,
-    "hash": "56f66f82b48a6926b9aa814a9283e54c"
+    "mtime": 1778848851.161586,
+    "hash": "f09a6a134be5d91303783a3458ff73b5"
   },
   "/Users/admin/go/src/library-management-system/backend/auth/cookies.go": {
     "mtime": 1778730174.57114,
@@ -20,8 +20,8 @@
     "hash": "f49c5ee28f55a399087f8a6a8ff616e0"
   },
   "/Users/admin/go/src/library-management-system/backend/auth/oauth.go": {
-    "mtime": 1778662904.4088445,
-    "hash": "4a13fe50f6a899038c2f3c7bac360ffe"
+    "mtime": 1778848301.1779552,
+    "hash": "3d25edb71889b185411df6d1382070ef"
   },
   "/Users/admin/go/src/library-management-system/backend/auth/init.go": {
     "mtime": 1778821972.9825878,
@@ -48,8 +48,8 @@
     "hash": "aea1dccc3e36c3661a5f381223f7236a"
   },
   "/Users/admin/go/src/library-management-system/backend/controllers/auth.go": {
-    "mtime": 1778757898.9369426,
-    "hash": "2ea0013e93be39a00567077511ee4189"
+    "mtime": 1778848317.0885007,
+    "hash": "2e1c2f8db761a7f54bc6300a09f4f434"
   },
   "/Users/admin/go/src/library-management-system/backend/controllers/health.go": {
     "mtime": 1778350078.2576425,

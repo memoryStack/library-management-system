@@ -160,15 +160,14 @@ func loadPasswordlessConfigOptional() (*Config, error) {
 }
 
 func GetAuthConfigs(c *fiber.Ctx) (*Config) {
-	connection := c.Query("connection")
-	if connection == "" {
+	medium := c.Query("medium")
+	if medium == "" {
 		return Conf
-	} else if connection == "sms" {
+	} else if medium == "sms" {
 		PasswordlessConf.Connection = "sms"
 		return PasswordlessConf
 	} else {
 		PasswordlessConf.Connection = "email"
 		return PasswordlessConf
 	}
-	return PasswordlessConf
 }
