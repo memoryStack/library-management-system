@@ -1,15 +1,15 @@
 {
   "/Users/admin/go/src/library-management-system/backend/main.go": {
-    "mtime": 1778673185.7656696,
-    "hash": "cbc70e19d59e6637acd652ed48a7155b"
+    "mtime": 1778757235.760695,
+    "hash": "8e0a55c91fb9ba682620cbe0beb6cfe6"
   },
   "/Users/admin/go/src/library-management-system/backend/auth/config.go": {
-    "mtime": 1778634393.6949065,
-    "hash": "1f69b9d595b1684d031af6f39efe825a"
+    "mtime": 1778821970.1162543,
+    "hash": "56f66f82b48a6926b9aa814a9283e54c"
   },
   "/Users/admin/go/src/library-management-system/backend/auth/cookies.go": {
-    "mtime": 1778727908.1946268,
-    "hash": "2d78402587793aaf65d8147bf200b21e"
+    "mtime": 1778730174.57114,
+    "hash": "af491b6dafc730edec64610a1a6d86e7"
   },
   "/Users/admin/go/src/library-management-system/backend/auth/context.go": {
     "mtime": 1778727907.279228,
@@ -24,12 +24,12 @@
     "hash": "4a13fe50f6a899038c2f3c7bac360ffe"
   },
   "/Users/admin/go/src/library-management-system/backend/auth/init.go": {
-    "mtime": 1778634300.1822932,
-    "hash": "00600a2ed08842f45622ce704eb37ea1"
+    "mtime": 1778821972.9825878,
+    "hash": "adc589e22317f582ff7b23d6207a87b6"
   },
   "/Users/admin/go/src/library-management-system/backend/middlewares/auth.go": {
-    "mtime": 1778727911.8616521,
-    "hash": "abfd23173266b206f021ec31af832dd3"
+    "mtime": 1778733127.417281,
+    "hash": "b09602052d39693480950d64b176d891"
   },
   "/Users/admin/go/src/library-management-system/backend/middlewares/middlewares.go": {
     "mtime": 1778634372.9958482,
@@ -48,7 +48,7 @@
     "hash": "aea1dccc3e36c3661a5f381223f7236a"
   },
   "/Users/admin/go/src/library-management-system/backend/controllers/auth.go": {
-    "mtime": 1778727916.380159,
+    "mtime": 1778757898.9369426,
     "hash": "2ea0013e93be39a00567077511ee4189"
   },
   "/Users/admin/go/src/library-management-system/backend/controllers/health.go": {

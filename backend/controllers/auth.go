@@ -76,7 +76,7 @@ func clearAuthCookies(c *fiber.Ctx, cfg *auth.Config) {
 // AuthLogin starts the Auth0 Universal Login flow (passwordless is configured in Auth0).
 func AuthLogin(c *fiber.Ctx) error {
 	fmt.Println("AuthLogin started")
-	cfg := auth.Conf
+	cfg := auth.GetAuthConfigs(c)
 	b := make([]byte, 16)
 	if _, err := rand.Read(b); err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "could not create login state"})
@@ -89,7 +89,7 @@ func AuthLogin(c *fiber.Ctx) error {
 
 // AuthCallback handles OAuth redirect from Auth0, exchanges the code, and sets httpOnly cookies.
 func AuthCallback(c *fiber.Ctx) error {
-	cfg := auth.Conf
+	cfg := auth.GetAuthConfigs(c)
 	if errMsg := c.Query("error"); errMsg != "" {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"error":             errMsg,
@@ -109,7 +109,7 @@ func AuthCallback(c *fiber.Ctx) error {
 	// it's not returning refresh token. it returns only access token
 	tr, err := auth.ExchangeAuthorizationCode(c.UserContext(), cfg, code)
 	if err != nil {
-		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": err.Error()})
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error1": err.Error()})
 	}
 
 	setAuthCookies(c, cfg, tr)
@@ -118,7 +118,7 @@ func AuthCallback(c *fiber.Ctx) error {
 	idtoken := tr.IDToken
 	userValues, err := auth.IDTokenClaims(idtoken)
 	if err != nil {
-		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": err.Error()})
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error2": err.Error()})
 	}
 
 	present := initializers.DB.Where("auth0_id = ?", userValues["sub"].(string)).First(&models.User{})

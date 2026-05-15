@@ -54,9 +54,6 @@ func doTokenForm(ctx context.Context, cfg *Config, form url.Values) (*TokenRespo
 	if err := json.Unmarshal(b, &tr); err != nil {
 		return nil, fmt.Errorf("decode token response: %w", err)
 	}
-	fmt.Println("doTokenForm started after callback access token", tr.AccessToken)
-	fmt.Println("doTokenForm started after callback refresh token", tr.RefreshToken)
-	fmt.Println("doTokenForm started after callback id token", tr.IDToken)
 	if tr.AccessToken == "" {
 		return nil, fmt.Errorf("auth0 token response missing access_token")
 	}

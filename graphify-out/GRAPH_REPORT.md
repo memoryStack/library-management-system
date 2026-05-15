@@ -1,12 +1,12 @@
-# Graph Report - library-management-system  (2026-05-14)
+# Graph Report - library-management-system  (2026-05-15)
 
 ## Corpus Check
-- 18 files · ~4,381 words
+- 18 files · ~4,583 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 66 nodes · 80 edges · 10 communities detected
-- Extraction: 79% EXTRACTED · 21% INFERRED · 0% AMBIGUOUS · INFERRED: 17 edges (avg confidence: 0.8)
+- 68 nodes · 85 edges · 10 communities detected
+- Extraction: 78% EXTRACTED · 22% INFERRED · 0% AMBIGUOUS · INFERRED: 19 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Community Hubs (Navigation)
@@ -23,15 +23,15 @@
 
 ## God Nodes (most connected - your core abstractions)
 1. `init()` - 5 edges
-2. `cookieSameSite()` - 5 edges
-3. `AuthCallback()` - 5 edges
-4. `doTokenForm()` - 4 edges
-5. `RefreshTokens()` - 4 edges
-6. `RequireAuth()` - 4 edges
-7. `setAuthCookies()` - 4 edges
-8. `MergeAuthCookiesIntoRequest()` - 4 edges
-9. `IDTokenClaims()` - 3 edges
-10. `ExchangeAuthorizationCode()` - 3 edges
+2. `Init()` - 5 edges
+3. `cookieSameSite()` - 5 edges
+4. `AuthCallback()` - 5 edges
+5. `doTokenForm()` - 4 edges
+6. `RefreshTokens()` - 4 edges
+7. `RequireAuth()` - 4 edges
+8. `setAuthCookies()` - 4 edges
+9. `MergeAuthCookiesIntoRequest()` - 4 edges
+10. `loadAuth0Config()` - 3 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `init()` --calls--> `LoadEnv()`  [INFERRED]
@@ -52,8 +52,8 @@ Cohesion: 0.4
 Nodes (9): AuthCallback(), AuthLogin(), AuthLogout(), AuthRefresh(), clearAuthCookies(), clearStateCookie(), cookieSameSite(), setAuthCookies() (+1 more)
 
 ### Community 1 - "Community 1"
-Cohesion: 0.25
-Nodes (5): AccessTokenFromCtx(), IDTokenClaims(), ValidateAccessToken(), AuthMe(), RequireAuth()
+Cohesion: 0.22
+Nodes (6): AccessTokenFromCtx(), IDTokenClaims(), initJWT(), ValidateAccessToken(), AuthMe(), RequireAuth()
 
 ### Community 2 - "Community 2"
 Cohesion: 0.36
@@ -64,8 +64,8 @@ Cohesion: 0.29
 Nodes (5): init(), ConnectDB(), ConnectDB(), SyncDB(), LoadEnv()
 
 ### Community 4 - "Community 4"
-Cohesion: 0.33
-Nodes (4): Config, loadConfig(), Init(), initJWT()
+Cohesion: 0.43
+Nodes (5): Config, loadAuth0Config(), loadConfig(), loadPasswordlessConfigOptional(), Init()
 
 ### Community 5 - "Community 5"
 Cohesion: 0.53
@@ -84,16 +84,16 @@ Nodes (3): main(), devCORSOrigins(), Stack()
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `RequireAuth()` connect `Community 1` to `Community 2`, `Community 5`?**
-  _High betweenness centrality (0.122) - this node is a cross-community bridge._
-- **Why does `RefreshTokens()` connect `Community 2` to `Community 0`, `Community 1`?**
-  _High betweenness centrality (0.091) - this node is a cross-community bridge._
-- **Why does `MergeAuthCookiesIntoRequest()` connect `Community 5` to `Community 1`?**
-  _High betweenness centrality (0.077) - this node is a cross-community bridge._
+  _High betweenness centrality (0.125) - this node is a cross-community bridge._
+- **Why does `initJWT()` connect `Community 1` to `Community 4`?**
+  _High betweenness centrality (0.101) - this node is a cross-community bridge._
+- **Why does `Init()` connect `Community 4` to `Community 1`?**
+  _High betweenness centrality (0.092) - this node is a cross-community bridge._
 - **Are the 4 inferred relationships involving `init()` (e.g. with `LoadEnv()` and `ConnectDB()`) actually correct?**
   _`init()` has 4 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 4 inferred relationships involving `Init()` (e.g. with `loadAuth0Config()` and `loadPasswordlessConfigOptional()`) actually correct?**
+  _`Init()` has 4 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 2 inferred relationships involving `AuthCallback()` (e.g. with `ExchangeAuthorizationCode()` and `IDTokenClaims()`) actually correct?**
   _`AuthCallback()` has 2 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 2 inferred relationships involving `RefreshTokens()` (e.g. with `RequireAuth()` and `AuthRefresh()`) actually correct?**
-  _`RefreshTokens()` has 2 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `Config`, `TokenResponse`, `User` to the rest of the system?**
   _5 weakly-connected nodes found - possible documentation gaps or missing edges._

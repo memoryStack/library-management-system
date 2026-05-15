@@ -5,9 +5,13 @@ import (
 	"os"
 	"strconv"
 	"strings"
+
+	"github.com/gofiber/fiber/v2"
 )
 
 // Config holds Auth0 OAuth/OIDC settings loaded from the environment.
+// The same shape is used for the primary (e.g. Universal Login) app and for a parallel
+// passwordless application, loaded with different env prefixes.
 type Config struct {
 	Domain            string
 	ClientID          string
@@ -27,19 +31,29 @@ type Config struct {
 	RefreshCookiePath string // narrow path so refresh token is not sent to every API route
 }
 
-// Conf is populated by Init and read by controllers/middlewares.
+// Conf is the primary Auth0 application (AUTH0_*). Populated by Init.
 var Conf *Config
 
-func loadConfig() (*Config, error) {
-	get := func(key string) (string, error) {
-		v := strings.TrimSpace(os.Getenv(key))
+// PasswordlessConf is the parallel passwordless Auth0 application (AUTH0_PASSWORDLESS_*).
+// Nil when AUTH0_PASSWORDLESS_DOMAIN is unset (passwordless flow disabled).
+var PasswordlessConf *Config
+
+// loadAuth0Config loads one Auth0 app from env keys prefix + field suffix.
+// Primary app uses prefix "AUTH0_" (e.g. AUTH0_DOMAIN). Passwordless uses "AUTH0_PASSWORDLESS_".
+func loadAuth0Config(prefix string) (*Config, error) {
+	key := func(suffix string) string {
+		return prefix + suffix
+	}
+	get := func(suffix string) (string, error) {
+		k := key(suffix)
+		v := strings.TrimSpace(os.Getenv(k))
 		if v == "" {
-			return "", fmt.Errorf("missing required env %s", key)
+			return "", fmt.Errorf("missing required env %s", k)
 		}
 		return v, nil
 	}
 
-	domain, err := get("AUTH0_DOMAIN")
+	domain, err := get("DOMAIN")
 	if err != nil {
 		return nil, err
 	}
@@ -47,65 +61,73 @@ func loadConfig() (*Config, error) {
 	domain = strings.TrimPrefix(domain, "http://")
 	domain = strings.TrimSuffix(domain, "/")
 
-	clientID, err := get("AUTH0_CLIENT_ID")
+	clientID, err := get("CLIENT_ID")
 	if err != nil {
 		return nil, err
 	}
-	clientSecret, err := get("AUTH0_CLIENT_SECRET")
+	clientSecret, err := get("CLIENT_SECRET")
 	if err != nil {
 		return nil, err
 	}
-	callbackURL, err := get("AUTH0_CALLBACK_URL")
+	callbackURL, err := get("CALLBACK_URL")
 	if err != nil {
 		return nil, err
 	}
-	audience, err := get("AUTH0_AUDIENCE")
+	audience, err := get("AUDIENCE")
 	if err != nil {
 		return nil, err
 	}
 
-	postLogin := strings.TrimSpace(os.Getenv("AUTH0_POST_LOGIN_REDIRECT"))
+	postLogin := strings.TrimSpace(os.Getenv(key("POST_LOGIN_REDIRECT")))
 	if postLogin == "" {
 		postLogin = "http://localhost:5173/"
 	}
-	logoutReturn := strings.TrimSpace(os.Getenv("AUTH0_LOGOUT_RETURN_URL"))
+	logoutReturn := strings.TrimSpace(os.Getenv(key("LOGOUT_RETURN_URL")))
 	if logoutReturn == "" {
 		logoutReturn = postLogin
 	}
 
-	connection := strings.TrimSpace(os.Getenv("AUTH0_CONNECTION"))
+	connection := strings.TrimSpace(os.Getenv(key("CONNECTION")))
 
 	cookieSecure := false
-	if v := strings.TrimSpace(os.Getenv("AUTH0_COOKIE_SECURE")); v != "" {
+	if v := strings.TrimSpace(os.Getenv(key("COOKIE_SECURE"))); v != "" {
 		b, err := strconv.ParseBool(v)
 		if err != nil {
-			return nil, fmt.Errorf("AUTH0_COOKIE_SECURE: %w", err)
+			return nil, fmt.Errorf("%s: %w", key("COOKIE_SECURE"), err)
 		}
 		cookieSecure = b
 	}
 
-	sameSite := strings.ToLower(strings.TrimSpace(os.Getenv("AUTH0_COOKIE_SAMESITE")))
+	sameSite := strings.ToLower(strings.TrimSpace(os.Getenv(key("COOKIE_SAMESITE"))))
 	if sameSite == "" {
 		sameSite = "lax"
 	}
 	if sameSite == "none" && !cookieSecure {
-		return nil, fmt.Errorf("AUTH0_COOKIE_SAMESITE=none requires AUTH0_COOKIE_SECURE=true")
+		return nil, fmt.Errorf("%s=none requires %s=true", key("COOKIE_SAMESITE"), key("COOKIE_SECURE"))
 	}
 
-	accessName := strings.TrimSpace(os.Getenv("AUTH0_ACCESS_COOKIE_NAME"))
+	accessName := strings.TrimSpace(os.Getenv(key("ACCESS_COOKIE_NAME")))
 	if accessName == "" {
-		accessName = "access_token"
+		if prefix == "AUTH0_" {
+			accessName = "access_token"
+		} else {
+			accessName = "access_token_pw"
+		}
 	}
-	refreshName := strings.TrimSpace(os.Getenv("AUTH0_REFRESH_COOKIE_NAME"))
+	refreshName := strings.TrimSpace(os.Getenv(key("REFRESH_COOKIE_NAME")))
 	if refreshName == "" {
-		refreshName = "refresh_token"
+		if prefix == "AUTH0_" {
+			refreshName = "refresh_token"
+		} else {
+			refreshName = "refresh_token_pw"
+		}
 	}
-	stateName := strings.TrimSpace(os.Getenv("AUTH0_STATE_COOKIE_NAME"))
+	stateName := strings.TrimSpace(os.Getenv(key("STATE_COOKIE_NAME")))
 	if stateName == "" {
 		stateName = "oauth_state"
 	}
 
-	refreshPath := strings.TrimSpace(os.Getenv("AUTH0_REFRESH_COOKIE_PATH"))
+	refreshPath := strings.TrimSpace(os.Getenv(key("REFRESH_COOKIE_PATH")))
 	if refreshPath == "" {
 		refreshPath = "/api/auth"
 	}
@@ -126,4 +148,27 @@ func loadConfig() (*Config, error) {
 		StateCookieName:   stateName,
 		RefreshCookiePath: refreshPath,
 	}, nil
+}
+
+// loadPasswordlessConfigOptional returns nil if passwordless is not configured
+// (AUTH0_PASSWORDLESS_DOMAIN unset); otherwise loads the full AUTH0_PASSWORDLESS_* set.
+func loadPasswordlessConfigOptional() (*Config, error) {
+	if strings.TrimSpace(os.Getenv("AUTH0_PASSWORDLESS_DOMAIN")) == "" {
+		return nil, nil
+	}
+	return loadAuth0Config("AUTH0_PASSWORDLESS_")
+}
+
+func GetAuthConfigs(c *fiber.Ctx) (*Config) {
+	connection := c.Query("connection")
+	if connection == "" {
+		return Conf
+	} else if connection == "sms" {
+		PasswordlessConf.Connection = "sms"
+		return PasswordlessConf
+	} else {
+		PasswordlessConf.Connection = "email"
+		return PasswordlessConf
+	}
+	return PasswordlessConf
 }

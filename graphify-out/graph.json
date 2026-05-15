@@ -43,19 +43,28 @@
       "label": "Config",
       "file_type": "code",
       "source_file": "auth/config.go",
-      "source_location": "L11",
+      "source_location": "L13",
       "id": "auth_config",
       "community": 4,
       "norm_label": "config"
     },
     {
-      "label": "loadConfig()",
+      "label": "loadAuth0Config()",
       "file_type": "code",
       "source_file": "auth/config.go",
-      "source_location": "L33",
-      "id": "auth_config_loadconfig",
+      "source_location": "L41",
+      "id": "auth_config_loadauth0config",
       "community": 4,
-      "norm_label": "loadconfig()"
+      "norm_label": "loadauth0config()"
+    },
+    {
+      "label": "loadPasswordlessConfigOptional()",
+      "file_type": "code",
+      "source_file": "auth/config.go",
+      "source_location": "L157",
+      "id": "auth_config_loadpasswordlessconfigoptional",
+      "community": 4,
+      "norm_label": "loadpasswordlessconfigoptional()"
     },
     {
       "label": "cookies.go",
@@ -117,7 +126,7 @@
       "source_file": "auth/jwt.go",
       "source_location": "L18",
       "id": "auth_jwt_initjwt",
-      "community": 4,
+      "community": 1,
       "norm_label": "initjwt()"
     },
     {
@@ -223,7 +232,7 @@
       "label": "Init()",
       "file_type": "code",
       "source_file": "auth/init.go",
-      "source_location": "L9",
+      "source_location": "L11",
       "id": "auth_init_init",
       "community": 4,
       "norm_label": "init()"
@@ -241,7 +250,7 @@
       "label": "RequireAuth()",
       "file_type": "code",
       "source_file": "middlewares/auth.go",
-      "source_location": "L16",
+      "source_location": "L17",
       "id": "middlewares_auth_requireauth",
       "community": 1,
       "norm_label": "requireauth()"
@@ -553,6 +562,15 @@
       "norm_label": "syncdb()"
     },
     {
+      "label": "loadConfig()",
+      "file_type": "code",
+      "source_file": "auth/config.go",
+      "source_location": "L33",
+      "community": 4,
+      "norm_label": "loadconfig()",
+      "id": "auth_config_loadconfig"
+    },
+    {
       "label": "MergeAuthCookiesIntoRequest()",
       "file_type": "code",
       "source_file": "auth/cookies.go",
@@ -688,6 +706,26 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "auth/config.go",
+      "source_location": "L41",
+      "weight": 1.0,
+      "source": "auth_config_go",
+      "target": "auth_config_loadauth0config",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "auth/config.go",
+      "source_location": "L157",
+      "weight": 1.0,
+      "source": "auth_config_go",
+      "target": "auth_config_loadpasswordlessconfigoptional",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "auth/config.go",
       "source_location": "L33",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -697,13 +735,35 @@
     {
       "relation": "calls",
       "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "auth/config.go",
+      "source_location": "L161",
+      "weight": 1.0,
+      "source": "auth_config_loadpasswordlessconfigoptional",
+      "target": "auth_config_loadauth0config",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "auth/init.go",
-      "source_location": "L10",
+      "source_location": "L12",
       "weight": 1.0,
       "source": "auth_init_init",
-      "target": "auth_config_loadconfig"
+      "target": "auth_config_loadauth0config"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "auth/init.go",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "auth_init_init",
+      "target": "auth_config_loadpasswordlessconfigoptional"
     },
     {
       "relation": "contains",
@@ -772,9 +832,9 @@
       "source_file": "auth/context.go",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "auth_context_go",
-      "target": "auth_context_accesstokenfromctx",
-      "confidence_score": 1.0
+      "target": "auth_context_accesstokenfromctx"
     },
     {
       "relation": "calls",
@@ -1028,6 +1088,17 @@
       "confidence_score": 1.0,
       "source": "auth_init_go",
       "target": "auth_init_init"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "auth/init.go",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "auth_init_init",
+      "target": "auth_config_loadconfig"
     },
     {
       "relation": "contains",
