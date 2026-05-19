@@ -1,12 +1,12 @@
-# Graph Report - library-management-system  (2026-05-15)
+# Graph Report - library-management-system  (2026-05-20)
 
 ## Corpus Check
-- 18 files · ~4,588 words
+- 22 files · ~5,522 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 69 nodes · 88 edges · 10 communities detected
-- Extraction: 76% EXTRACTED · 24% INFERRED · 0% AMBIGUOUS · INFERRED: 21 edges (avg confidence: 0.8)
+- 98 nodes · 126 edges · 11 communities detected
+- Extraction: 76% EXTRACTED · 24% INFERRED · 0% AMBIGUOUS · INFERRED: 30 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Community Hubs (Navigation)
@@ -17,21 +17,22 @@
 - [[_COMMUNITY_Community 4|Community 4]]
 - [[_COMMUNITY_Community 5|Community 5]]
 - [[_COMMUNITY_Community 6|Community 6]]
-- [[_COMMUNITY_Community 8|Community 8]]
+- [[_COMMUNITY_Community 7|Community 7]]
 - [[_COMMUNITY_Community 9|Community 9]]
 - [[_COMMUNITY_Community 10|Community 10]]
+- [[_COMMUNITY_Community 11|Community 11]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `AuthCallback()` - 6 edges
-2. `init()` - 5 edges
-3. `Init()` - 5 edges
-4. `cookieSameSite()` - 5 edges
-5. `doTokenForm()` - 4 edges
-6. `RefreshTokens()` - 4 edges
-7. `RequireAuth()` - 4 edges
-8. `setAuthCookies()` - 4 edges
-9. `AuthLogin()` - 4 edges
-10. `MergeAuthCookiesIntoRequest()` - 4 edges
+1. `DetectAuthClient()` - 6 edges
+2. `AuthCallback()` - 6 edges
+3. `Resolve()` - 6 edges
+4. `resolveAuthClient()` - 6 edges
+5. `init()` - 5 edges
+6. `Init()` - 5 edges
+7. `cookieSameSite()` - 5 edges
+8. `setAuthCookies()` - 5 edges
+9. `doTokenForm()` - 4 edges
+10. `RefreshTokens()` - 4 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `init()` --calls--> `LoadEnv()`  [INFERRED]
@@ -42,58 +43,62 @@
   main.go → initializers/db.go
 - `init()` --calls--> `ConnectDB()`  [INFERRED]
   main.go → initializers/database.go
-- `AuthCallback()` --calls--> `IDTokenClaims()`  [INFERRED]
-  controllers/auth.go → auth/jwt.go
+- `AuthCallback()` --calls--> `ExchangeAuthorizationCode()`  [INFERRED]
+  controllers/auth.go → auth/oauth.go
 
-## Communities (13 total, 3 thin omitted)
+## Communities (14 total, 3 thin omitted)
 
 ### Community 0 - "Community 0"
-Cohesion: 0.32
-Nodes (11): GetAuthConfigs(), AuthorizeURL(), AuthCallback(), AuthLogin(), AuthLogout(), AuthRefresh(), clearAuthCookies(), clearStateCookie() (+3 more)
+Cohesion: 0.21
+Nodes (14): GetAuthConfigs(), AccessTokenFromCtx(), IDTokenClaims(), AuthCallback(), AuthConfirmOTP(), AuthLogin(), AuthLogout(), AuthMe() (+6 more)
 
 ### Community 1 - "Community 1"
-Cohesion: 0.22
-Nodes (6): AccessTokenFromCtx(), IDTokenClaims(), initJWT(), ValidateAccessToken(), AuthMe(), RequireAuth()
+Cohesion: 0.18
+Nodes (8): init(), main(), ConnectDB(), ConnectDB(), SyncDB(), LoadEnv(), devCORSOrigins(), Stack()
 
 ### Community 2 - "Community 2"
-Cohesion: 0.29
-Nodes (5): init(), ConnectDB(), ConnectDB(), SyncDB(), LoadEnv()
+Cohesion: 0.24
+Nodes (8): cookieSameSiteFiber(), joinCookieHeader(), MergeAuthCookiesIntoRequest(), parseCookieHeader(), SetAuthCookies(), initJWT(), ValidateAccessToken(), RequireAuth()
 
 ### Community 3 - "Community 3"
+Cohesion: 0.29
+Nodes (7): classifyParsedUA(), classifyRawUA(), hasSecFetchMetadata(), parseExplicit(), Resolve(), Info, Kind
+
+### Community 4 - "Community 4"
+Cohesion: 0.22
+Nodes (5): Attach(), FromContext(), SetLocals(), Parser(), DetectAuthClient()
+
+### Community 5 - "Community 5"
+Cohesion: 0.36
+Nodes (7): AuthorizeURL(), doTokenForm(), ExchangeAuthorizationCode(), LogoutURL(), RefreshTokens(), tokenEndpoint(), TokenResponse
+
+### Community 6 - "Community 6"
+Cohesion: 0.36
+Nodes (6): detectAuthClientFromRequest(), parseAuthClientValue(), resolveAuthClient(), TestResolveAuthClient_explicit(), TestResolveAuthClient_secFetch(), AuthClientKind
+
+### Community 7 - "Community 7"
 Cohesion: 0.43
 Nodes (5): Config, loadAuth0Config(), loadConfig(), loadPasswordlessConfigOptional(), Init()
 
-### Community 4 - "Community 4"
-Cohesion: 0.43
-Nodes (6): doTokenForm(), ExchangeAuthorizationCode(), LogoutURL(), RefreshTokens(), tokenEndpoint(), TokenResponse
-
-### Community 5 - "Community 5"
-Cohesion: 0.53
-Nodes (5): cookieSameSiteFiber(), joinCookieHeader(), MergeAuthCookiesIntoRequest(), parseCookieHeader(), SetAuthCookies()
-
-### Community 6 - "Community 6"
-Cohesion: 0.5
-Nodes (3): main(), devCORSOrigins(), Stack()
-
 ## Knowledge Gaps
-- **5 isolated node(s):** `Config`, `TokenResponse`, `User`, `Author`, `Book`
+- **7 isolated node(s):** `Config`, `TokenResponse`, `User`, `Author`, `Book` (+2 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **3 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `RequireAuth()` connect `Community 1` to `Community 4`, `Community 5`?**
-  _High betweenness centrality (0.114) - this node is a cross-community bridge._
-- **Why does `RefreshTokens()` connect `Community 4` to `Community 0`, `Community 1`?**
-  _High betweenness centrality (0.085) - this node is a cross-community bridge._
-- **Why does `MergeAuthCookiesIntoRequest()` connect `Community 5` to `Community 1`?**
-  _High betweenness centrality (0.077) - this node is a cross-community bridge._
+- **Why does `AuthConfirmOTP()` connect `Community 0` to `Community 4`, `Community 6`?**
+  _High betweenness centrality (0.416) - this node is a cross-community bridge._
+- **Why does `DetectAuthClient()` connect `Community 4` to `Community 1`, `Community 3`?**
+  _High betweenness centrality (0.379) - this node is a cross-community bridge._
+- **Why does `FromContext()` connect `Community 4` to `Community 0`?**
+  _High betweenness centrality (0.340) - this node is a cross-community bridge._
+- **Are the 5 inferred relationships involving `DetectAuthClient()` (e.g. with `Parser()` and `Resolve()`) actually correct?**
+  _`DetectAuthClient()` has 5 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 3 inferred relationships involving `AuthCallback()` (e.g. with `GetAuthConfigs()` and `ExchangeAuthorizationCode()`) actually correct?**
   _`AuthCallback()` has 3 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 3 inferred relationships involving `resolveAuthClient()` (e.g. with `AuthConfirmOTP()` and `TestResolveAuthClient_explicit()`) actually correct?**
+  _`resolveAuthClient()` has 3 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 4 inferred relationships involving `init()` (e.g. with `LoadEnv()` and `ConnectDB()`) actually correct?**
   _`init()` has 4 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 4 inferred relationships involving `Init()` (e.g. with `loadAuth0Config()` and `loadPasswordlessConfigOptional()`) actually correct?**
-  _`Init()` has 4 INFERRED edges - model-reasoned connections that need verification._
-- **What connects `Config`, `TokenResponse`, `User` to the rest of the system?**
-  _5 weakly-connected nodes found - possible documentation gaps or missing edges._

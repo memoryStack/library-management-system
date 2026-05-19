@@ -9,7 +9,7 @@
       "source_file": "main.go",
       "source_location": "L1",
       "id": "main_go",
-      "community": 6,
+      "community": 1,
       "norm_label": "main.go"
     },
     {
@@ -18,7 +18,7 @@
       "source_file": "main.go",
       "source_location": "L20",
       "id": "backend_main_init",
-      "community": 2,
+      "community": 1,
       "norm_label": "init()"
     },
     {
@@ -27,7 +27,7 @@
       "source_file": "main.go",
       "source_location": "L50",
       "id": "backend_main_main",
-      "community": 6,
+      "community": 1,
       "norm_label": "main()"
     },
     {
@@ -36,7 +36,7 @@
       "source_file": "auth/config.go",
       "source_location": "L1",
       "id": "auth_config_go",
-      "community": 3,
+      "community": 7,
       "norm_label": "config.go"
     },
     {
@@ -45,7 +45,7 @@
       "source_file": "auth/config.go",
       "source_location": "L15",
       "id": "auth_config",
-      "community": 3,
+      "community": 7,
       "norm_label": "config"
     },
     {
@@ -54,7 +54,7 @@
       "source_file": "auth/config.go",
       "source_location": "L43",
       "id": "auth_config_loadauth0config",
-      "community": 3,
+      "community": 7,
       "norm_label": "loadauth0config()"
     },
     {
@@ -63,7 +63,7 @@
       "source_file": "auth/config.go",
       "source_location": "L155",
       "id": "auth_config_loadpasswordlessconfigoptional",
-      "community": 3,
+      "community": 7,
       "norm_label": "loadpasswordlessconfigoptional()"
     },
     {
@@ -81,7 +81,7 @@
       "source_file": "auth/cookies.go",
       "source_location": "L1",
       "id": "auth_cookies_go",
-      "community": 5,
+      "community": 2,
       "norm_label": "cookies.go"
     },
     {
@@ -90,7 +90,7 @@
       "source_file": "auth/cookies.go",
       "source_location": "L9",
       "id": "auth_cookies_cookiesamesitefiber",
-      "community": 5,
+      "community": 2,
       "norm_label": "cookiesamesitefiber()"
     },
     {
@@ -99,7 +99,7 @@
       "source_file": "auth/cookies.go",
       "source_location": "L21",
       "id": "auth_cookies_setauthcookies",
-      "community": 5,
+      "community": 2,
       "norm_label": "setauthcookies()"
     },
     {
@@ -108,7 +108,7 @@
       "source_file": "auth/context.go",
       "source_location": "L1",
       "id": "auth_context_go",
-      "community": 1,
+      "community": 0,
       "norm_label": "context.go"
     },
     {
@@ -117,7 +117,7 @@
       "source_file": "auth/context.go",
       "source_location": "L15",
       "id": "auth_context_accesstokenfromctx",
-      "community": 1,
+      "community": 0,
       "norm_label": "accesstokenfromctx()"
     },
     {
@@ -126,7 +126,7 @@
       "source_file": "auth/jwt.go",
       "source_location": "L1",
       "id": "auth_jwt_go",
-      "community": 1,
+      "community": 2,
       "norm_label": "jwt.go"
     },
     {
@@ -135,7 +135,7 @@
       "source_file": "auth/jwt.go",
       "source_location": "L18",
       "id": "auth_jwt_initjwt",
-      "community": 1,
+      "community": 2,
       "norm_label": "initjwt()"
     },
     {
@@ -144,7 +144,7 @@
       "source_file": "auth/jwt.go",
       "source_location": "L41",
       "id": "auth_jwt_validateaccesstoken",
-      "community": 1,
+      "community": 2,
       "norm_label": "validateaccesstoken()"
     },
     {
@@ -153,7 +153,7 @@
       "source_file": "auth/jwt.go",
       "source_location": "L62",
       "id": "auth_jwt_idtokenclaims",
-      "community": 1,
+      "community": 0,
       "norm_label": "idtokenclaims()"
     },
     {
@@ -162,7 +162,7 @@
       "source_file": "auth/oauth.go",
       "source_location": "L1",
       "id": "auth_oauth_go",
-      "community": 4,
+      "community": 5,
       "norm_label": "oauth.go"
     },
     {
@@ -171,7 +171,7 @@
       "source_file": "auth/oauth.go",
       "source_location": "L15",
       "id": "auth_tokenresponse",
-      "community": 4,
+      "community": 5,
       "norm_label": "tokenresponse"
     },
     {
@@ -180,7 +180,7 @@
       "source_file": "auth/oauth.go",
       "source_location": "L24",
       "id": "auth_oauth_tokenendpoint",
-      "community": 4,
+      "community": 5,
       "norm_label": "tokenendpoint()"
     },
     {
@@ -189,7 +189,7 @@
       "source_file": "auth/oauth.go",
       "source_location": "L30",
       "id": "auth_oauth_dotokenform",
-      "community": 4,
+      "community": 5,
       "norm_label": "dotokenform()"
     },
     {
@@ -198,7 +198,7 @@
       "source_file": "auth/oauth.go",
       "source_location": "L64",
       "id": "auth_oauth_exchangeauthorizationcode",
-      "community": 4,
+      "community": 5,
       "norm_label": "exchangeauthorizationcode()"
     },
     {
@@ -207,7 +207,7 @@
       "source_file": "auth/oauth.go",
       "source_location": "L75",
       "id": "auth_oauth_refreshtokens",
-      "community": 4,
+      "community": 5,
       "norm_label": "refreshtokens()"
     },
     {
@@ -216,7 +216,7 @@
       "source_file": "auth/oauth.go",
       "source_location": "L86",
       "id": "auth_oauth_authorizeurl",
-      "community": 0,
+      "community": 5,
       "norm_label": "authorizeurl()"
     },
     {
@@ -225,7 +225,7 @@
       "source_file": "auth/oauth.go",
       "source_location": "L103",
       "id": "auth_oauth_logouturl",
-      "community": 4,
+      "community": 5,
       "norm_label": "logouturl()"
     },
     {
@@ -234,7 +234,7 @@
       "source_file": "auth/init.go",
       "source_location": "L1",
       "id": "auth_init_go",
-      "community": 3,
+      "community": 7,
       "norm_label": "init.go"
     },
     {
@@ -243,7 +243,7 @@
       "source_file": "auth/init.go",
       "source_location": "L11",
       "id": "auth_init_init",
-      "community": 3,
+      "community": 7,
       "norm_label": "init()"
     },
     {
@@ -252,7 +252,7 @@
       "source_file": "middlewares/auth.go",
       "source_location": "L1",
       "id": "middlewares_auth_go",
-      "community": 1,
+      "community": 2,
       "norm_label": "auth.go"
     },
     {
@@ -261,8 +261,26 @@
       "source_file": "middlewares/auth.go",
       "source_location": "L17",
       "id": "middlewares_auth_requireauth",
-      "community": 1,
+      "community": 2,
       "norm_label": "requireauth()"
+    },
+    {
+      "label": "client.go",
+      "file_type": "code",
+      "source_file": "middlewares/client.go",
+      "source_location": "L1",
+      "id": "middlewares_client_go",
+      "community": 4,
+      "norm_label": "client.go"
+    },
+    {
+      "label": "DetectAuthClient()",
+      "file_type": "code",
+      "source_file": "middlewares/client.go",
+      "source_location": "L13",
+      "id": "middlewares_client_detectauthclient",
+      "community": 4,
+      "norm_label": "detectauthclient()"
     },
     {
       "label": "middlewares.go",
@@ -270,7 +288,7 @@
       "source_file": "middlewares/middlewares.go",
       "source_location": "L1",
       "id": "middlewares_middlewares_go",
-      "community": 6,
+      "community": 1,
       "norm_label": "middlewares.go"
     },
     {
@@ -279,7 +297,7 @@
       "source_file": "middlewares/middlewares.go",
       "source_location": "L20",
       "id": "middlewares_middlewares_devcorsorigins",
-      "community": 6,
+      "community": 1,
       "norm_label": "devcorsorigins()"
     },
     {
@@ -288,7 +306,7 @@
       "source_file": "middlewares/middlewares.go",
       "source_location": "L40",
       "id": "middlewares_middlewares_stack",
-      "community": 6,
+      "community": 1,
       "norm_label": "stack()"
     },
     {
@@ -297,7 +315,7 @@
       "source_file": "models/user.go",
       "source_location": "L1",
       "id": "models_user_go",
-      "community": 8,
+      "community": 9,
       "norm_label": "user.go"
     },
     {
@@ -306,7 +324,7 @@
       "source_file": "models/user.go",
       "source_location": "L5",
       "id": "models_user",
-      "community": 8,
+      "community": 9,
       "norm_label": "user"
     },
     {
@@ -315,7 +333,7 @@
       "source_file": "models/author.go",
       "source_location": "L1",
       "id": "models_author_go",
-      "community": 9,
+      "community": 10,
       "norm_label": "author.go"
     },
     {
@@ -324,7 +342,7 @@
       "source_file": "models/author.go",
       "source_location": "L5",
       "id": "models_author",
-      "community": 9,
+      "community": 10,
       "norm_label": "author"
     },
     {
@@ -333,7 +351,7 @@
       "source_file": "models/book.go",
       "source_location": "L1",
       "id": "models_book_go",
-      "community": 10,
+      "community": 11,
       "norm_label": "book.go"
     },
     {
@@ -342,7 +360,7 @@
       "source_file": "models/book.go",
       "source_location": "L5",
       "id": "models_book",
-      "community": 10,
+      "community": 11,
       "norm_label": "book"
     },
     {
@@ -358,7 +376,7 @@
       "label": "cookieSameSite()",
       "file_type": "code",
       "source_file": "controllers/auth.go",
-      "source_location": "L19",
+      "source_location": "L22",
       "id": "controllers_auth_cookiesamesite",
       "community": 0,
       "norm_label": "cookiesamesite()"
@@ -367,7 +385,7 @@
       "label": "setStateCookie()",
       "file_type": "code",
       "source_file": "controllers/auth.go",
-      "source_location": "L30",
+      "source_location": "L33",
       "id": "controllers_auth_setstatecookie",
       "community": 0,
       "norm_label": "setstatecookie()"
@@ -376,7 +394,7 @@
       "label": "clearStateCookie()",
       "file_type": "code",
       "source_file": "controllers/auth.go",
-      "source_location": "L42",
+      "source_location": "L45",
       "id": "controllers_auth_clearstatecookie",
       "community": 0,
       "norm_label": "clearstatecookie()"
@@ -385,7 +403,7 @@
       "label": "setAuthCookies()",
       "file_type": "code",
       "source_file": "controllers/auth.go",
-      "source_location": "L54",
+      "source_location": "L57",
       "id": "controllers_auth_setauthcookies",
       "community": 0,
       "norm_label": "setauthcookies()"
@@ -394,7 +412,7 @@
       "label": "clearAuthCookies()",
       "file_type": "code",
       "source_file": "controllers/auth.go",
-      "source_location": "L58",
+      "source_location": "L61",
       "id": "controllers_auth_clearauthcookies",
       "community": 0,
       "norm_label": "clearauthcookies()"
@@ -403,16 +421,34 @@
       "label": "AuthLogin()",
       "file_type": "code",
       "source_file": "controllers/auth.go",
-      "source_location": "L77",
+      "source_location": "L80",
       "id": "controllers_auth_authlogin",
       "community": 0,
       "norm_label": "authlogin()"
     },
     {
+      "label": "AuthLoginSelfManaged()",
+      "file_type": "code",
+      "source_file": "controllers/auth.go",
+      "source_location": "L93",
+      "id": "controllers_auth_authloginselfmanaged",
+      "community": 0,
+      "norm_label": "authloginselfmanaged()"
+    },
+    {
+      "label": "AuthConfirmOTP()",
+      "file_type": "code",
+      "source_file": "controllers/auth.go",
+      "source_location": "L142",
+      "id": "controllers_auth_authconfirmotp",
+      "community": 0,
+      "norm_label": "authconfirmotp()"
+    },
+    {
       "label": "AuthCallback()",
       "file_type": "code",
       "source_file": "controllers/auth.go",
-      "source_location": "L91",
+      "source_location": "L213",
       "id": "controllers_auth_authcallback",
       "community": 0,
       "norm_label": "authcallback()"
@@ -421,7 +457,7 @@
       "label": "AuthRefresh()",
       "file_type": "code",
       "source_file": "controllers/auth.go",
-      "source_location": "L146",
+      "source_location": "L269",
       "id": "controllers_auth_authrefresh",
       "community": 0,
       "norm_label": "authrefresh()"
@@ -430,7 +466,7 @@
       "label": "AuthLogout()",
       "file_type": "code",
       "source_file": "controllers/auth.go",
-      "source_location": "L165",
+      "source_location": "L288",
       "id": "controllers_auth_authlogout",
       "community": 0,
       "norm_label": "authlogout()"
@@ -439,9 +475,9 @@
       "label": "AuthMe()",
       "file_type": "code",
       "source_file": "controllers/auth.go",
-      "source_location": "L174",
+      "source_location": "L297",
       "id": "controllers_auth_authme",
-      "community": 1,
+      "community": 0,
       "norm_label": "authme()"
     },
     {
@@ -450,7 +486,7 @@
       "source_file": "controllers/health.go",
       "source_location": "L1",
       "id": "controllers_health_go",
-      "community": 11,
+      "community": 12,
       "norm_label": "health.go"
     },
     {
@@ -459,7 +495,7 @@
       "source_file": "controllers/health.go",
       "source_location": "L6",
       "id": "controllers_health_health",
-      "community": 11,
+      "community": 12,
       "norm_label": "health()"
     },
     {
@@ -468,7 +504,7 @@
       "source_file": "controllers/book.go",
       "source_location": "L1",
       "id": "controllers_book_go",
-      "community": 7,
+      "community": 8,
       "norm_label": "book.go"
     },
     {
@@ -477,7 +513,7 @@
       "source_file": "controllers/book.go",
       "source_location": "L11",
       "id": "controllers_book_getbook",
-      "community": 7,
+      "community": 8,
       "norm_label": "getbook()"
     },
     {
@@ -486,7 +522,7 @@
       "source_file": "controllers/book.go",
       "source_location": "L26",
       "id": "controllers_book_getallbooks",
-      "community": 7,
+      "community": 8,
       "norm_label": "getallbooks()"
     },
     {
@@ -495,7 +531,7 @@
       "source_file": "controllers/book.go",
       "source_location": "L41",
       "id": "controllers_book_createbook",
-      "community": 7,
+      "community": 8,
       "norm_label": "createbook()"
     },
     {
@@ -504,7 +540,7 @@
       "source_file": "controllers/book.go",
       "source_location": "L65",
       "id": "controllers_book_deletebook",
-      "community": 7,
+      "community": 8,
       "norm_label": "deletebook()"
     },
     {
@@ -513,7 +549,7 @@
       "source_file": "helpers/response.go",
       "source_location": "L1",
       "id": "helpers_response_go",
-      "community": 12,
+      "community": 13,
       "norm_label": "response.go"
     },
     {
@@ -522,8 +558,134 @@
       "source_file": "helpers/response.go",
       "source_location": "L6",
       "id": "helpers_response_jsonerror",
-      "community": 12,
+      "community": 13,
       "norm_label": "jsonerror()"
+    },
+    {
+      "label": "client.go",
+      "file_type": "code",
+      "source_file": "helpers/client/client.go",
+      "source_location": "L1",
+      "id": "helpers_client_client_go",
+      "community": 3,
+      "norm_label": "client.go"
+    },
+    {
+      "label": "Kind",
+      "file_type": "code",
+      "source_file": "helpers/client/client.go",
+      "source_location": "L11",
+      "id": "client_kind",
+      "community": 3,
+      "norm_label": "kind"
+    },
+    {
+      "label": "Info",
+      "file_type": "code",
+      "source_file": "helpers/client/client.go",
+      "source_location": "L19",
+      "id": "client_info",
+      "community": 3,
+      "norm_label": "info"
+    },
+    {
+      "label": "Resolve()",
+      "file_type": "code",
+      "source_file": "helpers/client/client.go",
+      "source_location": "L31",
+      "id": "client_client_resolve",
+      "community": 3,
+      "norm_label": "resolve()"
+    },
+    {
+      "label": "parseExplicit()",
+      "file_type": "code",
+      "source_file": "helpers/client/client.go",
+      "source_location": "L60",
+      "id": "client_client_parseexplicit",
+      "community": 3,
+      "norm_label": "parseexplicit()"
+    },
+    {
+      "label": "hasSecFetchMetadata()",
+      "file_type": "code",
+      "source_file": "helpers/client/client.go",
+      "source_location": "L71",
+      "id": "client_client_hassecfetchmetadata",
+      "community": 3,
+      "norm_label": "hassecfetchmetadata()"
+    },
+    {
+      "label": "classifyRawUA()",
+      "file_type": "code",
+      "source_file": "helpers/client/client.go",
+      "source_location": "L82",
+      "id": "client_client_classifyrawua",
+      "community": 3,
+      "norm_label": "classifyrawua()"
+    },
+    {
+      "label": "classifyParsedUA()",
+      "file_type": "code",
+      "source_file": "helpers/client/client.go",
+      "source_location": "L106",
+      "id": "client_client_classifyparsedua",
+      "community": 3,
+      "norm_label": "classifyparsedua()"
+    },
+    {
+      "label": ".IsWeb()",
+      "file_type": "code",
+      "source_file": "helpers/client/client.go",
+      "source_location": "L123",
+      "id": "client_info_isweb",
+      "community": 3,
+      "norm_label": ".isweb()"
+    },
+    {
+      "label": ".IsNative()",
+      "file_type": "code",
+      "source_file": "helpers/client/client.go",
+      "source_location": "L124",
+      "id": "client_info_isnative",
+      "community": 3,
+      "norm_label": ".isnative()"
+    },
+    {
+      "label": "parser.go",
+      "file_type": "code",
+      "source_file": "helpers/client/parser.go",
+      "source_location": "L1",
+      "id": "helpers_client_parser_go",
+      "community": 4,
+      "norm_label": "parser.go"
+    },
+    {
+      "label": "Parser()",
+      "file_type": "code",
+      "source_file": "helpers/client/parser.go",
+      "source_location": "L16",
+      "id": "client_parser_parser",
+      "community": 4,
+      "norm_label": "parser()"
+    },
+    {
+      "label": "locals.go",
+      "file_type": "code",
+      "source_file": "helpers/client/locals.go",
+      "source_location": "L1",
+      "id": "helpers_client_locals_go",
+      "community": 4,
+      "norm_label": "locals.go"
+    },
+    {
+      "label": "SetLocals()",
+      "file_type": "code",
+      "source_file": "helpers/client/locals.go",
+      "source_location": "L17",
+      "id": "client_locals_setlocals",
+      "community": 4,
+      "norm_label": "setlocals()"
     },
     {
       "label": "env.go",
@@ -531,7 +693,7 @@
       "source_file": "initializers/env.go",
       "source_location": "L1",
       "id": "initializers_env_go",
-      "community": 2,
+      "community": 1,
       "norm_label": "env.go"
     },
     {
@@ -540,7 +702,7 @@
       "source_file": "initializers/env.go",
       "source_location": "L19",
       "id": "initializers_env_loadenv",
-      "community": 2,
+      "community": 1,
       "norm_label": "loadenv()"
     },
     {
@@ -549,7 +711,7 @@
       "source_file": "initializers/db.go",
       "source_location": "L1",
       "id": "initializers_db_go",
-      "community": 2,
+      "community": 1,
       "norm_label": "db.go"
     },
     {
@@ -558,7 +720,7 @@
       "source_file": "initializers/db.go",
       "source_location": "L19",
       "id": "initializers_db_connectdb",
-      "community": 2,
+      "community": 1,
       "norm_label": "connectdb()"
     },
     {
@@ -567,15 +729,114 @@
       "source_file": "initializers/db.go",
       "source_location": "L52",
       "id": "initializers_db_syncdb",
-      "community": 2,
+      "community": 1,
       "norm_label": "syncdb()"
+    },
+    {
+      "label": "context.go",
+      "file_type": "code",
+      "source_file": "helpers/client/context.go",
+      "source_location": "L1",
+      "community": 4,
+      "norm_label": "context.go",
+      "id": "helpers_client_context_go"
+    },
+    {
+      "label": "Attach()",
+      "file_type": "code",
+      "source_file": "helpers/client/context.go",
+      "source_location": "L8",
+      "community": 4,
+      "norm_label": "attach()",
+      "id": "client_context_attach"
+    },
+    {
+      "label": "FromContext()",
+      "file_type": "code",
+      "source_file": "helpers/client/context.go",
+      "source_location": "L13",
+      "community": 4,
+      "norm_label": "fromcontext()",
+      "id": "client_context_fromcontext"
+    },
+    {
+      "label": "auth_client.go",
+      "file_type": "code",
+      "source_file": "controllers/auth_client.go",
+      "source_location": "L1",
+      "community": 6,
+      "norm_label": "auth_client.go",
+      "id": "controllers_auth_client_go"
+    },
+    {
+      "label": "AuthClientKind",
+      "file_type": "code",
+      "source_file": "controllers/auth_client.go",
+      "source_location": "L11",
+      "community": 6,
+      "norm_label": "authclientkind",
+      "id": "controllers_authclientkind"
+    },
+    {
+      "label": "resolveAuthClient()",
+      "file_type": "code",
+      "source_file": "controllers/auth_client.go",
+      "source_location": "L23",
+      "community": 6,
+      "norm_label": "resolveauthclient()",
+      "id": "controllers_auth_client_resolveauthclient"
+    },
+    {
+      "label": "parseAuthClientValue()",
+      "file_type": "code",
+      "source_file": "controllers/auth_client.go",
+      "source_location": "L36",
+      "community": 6,
+      "norm_label": "parseauthclientvalue()",
+      "id": "controllers_auth_client_parseauthclientvalue"
+    },
+    {
+      "label": "detectAuthClientFromRequest()",
+      "file_type": "code",
+      "source_file": "controllers/auth_client.go",
+      "source_location": "L49",
+      "community": 6,
+      "norm_label": "detectauthclientfromrequest()",
+      "id": "controllers_auth_client_detectauthclientfromrequest"
+    },
+    {
+      "label": "auth_client_test.go",
+      "file_type": "code",
+      "source_file": "controllers/auth_client_test.go",
+      "source_location": "L1",
+      "community": 6,
+      "norm_label": "auth_client_test.go",
+      "id": "controllers_auth_client_test_go"
+    },
+    {
+      "label": "TestResolveAuthClient_explicit()",
+      "file_type": "code",
+      "source_file": "controllers/auth_client_test.go",
+      "source_location": "L10",
+      "community": 6,
+      "norm_label": "testresolveauthclient_explicit()",
+      "id": "controllers_auth_client_test_testresolveauthclient_explicit"
+    },
+    {
+      "label": "TestResolveAuthClient_secFetch()",
+      "file_type": "code",
+      "source_file": "controllers/auth_client_test.go",
+      "source_location": "L33",
+      "community": 6,
+      "norm_label": "testresolveauthclient_secfetch()",
+      "id": "controllers_auth_client_test_testresolveauthclient_secfetch"
     },
     {
       "label": "loadConfig()",
       "file_type": "code",
       "source_file": "auth/config.go",
       "source_location": "L33",
-      "community": 3,
+      "community": 7,
       "norm_label": "loadconfig()",
       "id": "auth_config_loadconfig"
     },
@@ -584,7 +845,7 @@
       "file_type": "code",
       "source_file": "auth/cookies.go",
       "source_location": "L24",
-      "community": 5,
+      "community": 2,
       "norm_label": "mergeauthcookiesintorequest()",
       "id": "auth_cookies_mergeauthcookiesintorequest"
     },
@@ -593,7 +854,7 @@
       "file_type": "code",
       "source_file": "auth/cookies.go",
       "source_location": "L36",
-      "community": 5,
+      "community": 2,
       "norm_label": "parsecookieheader()",
       "id": "auth_cookies_parsecookieheader"
     },
@@ -602,7 +863,7 @@
       "file_type": "code",
       "source_file": "auth/cookies.go",
       "source_location": "L56",
-      "community": 5,
+      "community": 2,
       "norm_label": "joincookieheader()",
       "id": "auth_cookies_joincookieheader"
     },
@@ -611,7 +872,7 @@
       "file_type": "code",
       "source_file": "initializers/database.go",
       "source_location": "L1",
-      "community": 2,
+      "community": 1,
       "norm_label": "database.go",
       "id": "initializers_database_go"
     },
@@ -620,7 +881,7 @@
       "file_type": "code",
       "source_file": "initializers/database.go",
       "source_location": "L18",
-      "community": 2,
+      "community": 1,
       "norm_label": "connectdb()",
       "id": "initializers_database_connectdb"
     }
@@ -737,9 +998,9 @@
       "source_file": "auth/config.go",
       "source_location": "L162",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "auth_config_go",
-      "target": "auth_config_getauthconfigs",
-      "confidence_score": 1.0
+      "target": "auth_config_getauthconfigs"
     },
     {
       "relation": "contains",
@@ -1165,6 +1426,71 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "middlewares/client.go",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "middlewares_client_go",
+      "target": "middlewares_client_detectauthclient"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "middlewares/client.go",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "middlewares_client_detectauthclient",
+      "target": "client_parser_parser"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "middlewares/client.go",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "middlewares_client_detectauthclient",
+      "target": "client_client_resolve"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "middlewares/client.go",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "middlewares_client_detectauthclient",
+      "target": "client_locals_setlocals"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "middlewares/middlewares.go",
+      "source_location": "L68",
+      "weight": 1.0,
+      "source": "middlewares_middlewares_stack",
+      "target": "middlewares_client_detectauthclient"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "middlewares/client.go",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "middlewares_client_detectauthclient",
+      "target": "client_context_attach"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "middlewares/middlewares.go",
       "source_location": "L20",
       "weight": 1.0,
@@ -1287,6 +1613,26 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "controllers/auth.go",
+      "source_location": "L94",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_auth_go",
+      "target": "controllers_auth_authloginselfmanaged"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "controllers/auth.go",
+      "source_location": "L143",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_auth_go",
+      "target": "controllers_auth_authconfirmotp"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "controllers/auth.go",
       "source_location": "L113",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -1394,6 +1740,17 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "controllers/auth.go",
+      "source_location": "L196",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_auth_authconfirmotp",
+      "target": "controllers_auth_setauthcookies"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "controllers/auth.go",
       "source_location": "L136",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -1421,6 +1778,28 @@
       "confidence_score": 1.0,
       "source": "controllers_auth_authlogout",
       "target": "controllers_auth_clearauthcookies"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "controllers/auth.go",
+      "source_location": "L144",
+      "weight": 1.0,
+      "source": "controllers_auth_authconfirmotp",
+      "target": "client_context_fromcontext"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "controllers/auth.go",
+      "source_location": "L144",
+      "weight": 1.0,
+      "source": "controllers_auth_authconfirmotp",
+      "target": "controllers_auth_client_resolveauthclient"
     },
     {
       "relation": "contains",
@@ -1485,6 +1864,160 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "helpers/client/client.go",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "helpers_client_client_go",
+      "target": "client_kind"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "helpers/client/client.go",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "helpers_client_client_go",
+      "target": "client_info"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "helpers/client/client.go",
+      "source_location": "L31",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "helpers_client_client_go",
+      "target": "client_client_resolve"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "helpers/client/client.go",
+      "source_location": "L60",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "helpers_client_client_go",
+      "target": "client_client_parseexplicit"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "helpers/client/client.go",
+      "source_location": "L71",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "helpers_client_client_go",
+      "target": "client_client_hassecfetchmetadata"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "helpers/client/client.go",
+      "source_location": "L82",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "helpers_client_client_go",
+      "target": "client_client_classifyrawua"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "helpers/client/client.go",
+      "source_location": "L106",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "helpers_client_client_go",
+      "target": "client_client_classifyparsedua"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "helpers/client/client.go",
+      "source_location": "L123",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "client_info",
+      "target": "client_info_isweb"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "helpers/client/client.go",
+      "source_location": "L124",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "client_info",
+      "target": "client_info_isnative"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "helpers/client/client.go",
+      "source_location": "L32",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "client_client_resolve",
+      "target": "client_client_parseexplicit"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "helpers/client/client.go",
+      "source_location": "L38",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "client_client_resolve",
+      "target": "client_client_hassecfetchmetadata"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "helpers/client/client.go",
+      "source_location": "L47",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "client_client_resolve",
+      "target": "client_client_classifyrawua"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "helpers/client/client.go",
+      "source_location": "L52",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "client_client_resolve",
+      "target": "client_client_classifyparsedua"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "helpers/client/parser.go",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "helpers_client_parser_go",
+      "target": "client_parser_parser"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "helpers/client/locals.go",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "helpers_client_locals_go",
+      "target": "client_locals_setlocals",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "initializers/env.go",
       "source_location": "L19",
       "weight": 1.0,
@@ -1511,6 +2044,130 @@
       "confidence_score": 1.0,
       "source": "initializers_db_go",
       "target": "initializers_db_syncdb"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "helpers/client/context.go",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "helpers_client_context_go",
+      "target": "client_context_attach"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "helpers/client/context.go",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "helpers_client_context_go",
+      "target": "client_context_fromcontext"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "controllers/auth_client.go",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_auth_client_go",
+      "target": "controllers_authclientkind"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "controllers/auth_client.go",
+      "source_location": "L23",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_auth_client_go",
+      "target": "controllers_auth_client_resolveauthclient"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "controllers/auth_client.go",
+      "source_location": "L36",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_auth_client_go",
+      "target": "controllers_auth_client_parseauthclientvalue"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "controllers/auth_client.go",
+      "source_location": "L49",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_auth_client_go",
+      "target": "controllers_auth_client_detectauthclientfromrequest"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "controllers/auth_client.go",
+      "source_location": "L24",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_auth_client_resolveauthclient",
+      "target": "controllers_auth_client_parseauthclientvalue"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "controllers/auth_client.go",
+      "source_location": "L30",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_auth_client_resolveauthclient",
+      "target": "controllers_auth_client_detectauthclientfromrequest"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "controllers/auth_client_test.go",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "controllers_auth_client_test_testresolveauthclient_explicit",
+      "target": "controllers_auth_client_resolveauthclient"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "controllers/auth_client_test.go",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "controllers_auth_client_test_testresolveauthclient_secfetch",
+      "target": "controllers_auth_client_resolveauthclient"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "controllers/auth_client_test.go",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_auth_client_test_go",
+      "target": "controllers_auth_client_test_testresolveauthclient_explicit"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "controllers/auth_client_test.go",
+      "source_location": "L33",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_auth_client_test_go",
+      "target": "controllers_auth_client_test_testresolveauthclient_secfetch"
     },
     {
       "relation": "calls",

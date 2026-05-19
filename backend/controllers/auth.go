@@ -13,7 +13,6 @@ import (
 
 	"library-management-system/backend/auth"
 
-	// "github.com/auth0/go-jwt-middleware/v2/validator"
 	"github.com/gofiber/fiber/v2"
 
 	"library-management-system/backend/initializers"
@@ -140,20 +139,16 @@ func AuthLoginSelfManaged(c *fiber.Ctx) error {
 	})
 }
 
-type OTPConfirmResponse struct {
-	AccessToken string `json:"access_token"`
-	RefreshToken string `json:"refresh_token"`
-	IDToken string `json:"id_token"`
-	TokenType string `json:"token_type"`
-	ExpiresIn int `json:"expires_in"`
-	Scope string `json:"scope"`
-}
-
 func AuthConfirmOTP(c *fiber.Ctx) error {
+	if c.Locals("clientKnown") != true {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"error": "could not determine client type; pass client=web or client=native (query or X-Client-Type header)",
+		})
+	}
+
 	cfg := auth.PasswordlessConf
-	
-	url := "https://"+auth.PasswordlessConf.Domain+"/oauth/token"
-	
+	url := "https://" + cfg.Domain + "/oauth/token"
+
 	var requestBody map[string]string
 	if err := c.BodyParser(&requestBody); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
@@ -161,13 +156,13 @@ func AuthConfirmOTP(c *fiber.Ctx) error {
 		})
 	}
 	requestPayload := map[string]string{
-		"grant_type": "http://auth0.com/oauth/grant-type/passwordless/otp",
-		"client_id": cfg.ClientID,
+		"grant_type":    "http://auth0.com/oauth/grant-type/passwordless/otp",
+		"client_id":     cfg.ClientID,
 		"client_secret": cfg.ClientSecret,
-		"username": requestBody["username"],
-		"otp": requestBody["otp"],
-		"realm": c.Query("medium"),
-		"scope": "openid profile email offline_access",
+		"username":      requestBody["username"],
+		"otp":           requestBody["otp"],
+		"realm":         c.Query("medium"),
+		"scope":         "openid profile email offline_access",
 	}
 
 	jsonData, err := json.Marshal(requestPayload)
@@ -176,31 +171,43 @@ func AuthConfirmOTP(c *fiber.Ctx) error {
 	}
 
 	resp, err := http.Post(url, "application/json", bytes.NewReader(jsonData))
-	defer resp.Body.Close()
-
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
 	}
+	defer resp.Body.Close()
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
 	}
+	if resp.StatusCode < 200 || resp.StatusCode > 299 {
+		return c.Status(resp.StatusCode).JSON(fiber.Map{
+			"error": string(body),
+		})
+	}
 
-	var response OTPConfirmResponse
-	if err := json.Unmarshal(body, &response); err != nil {
+	var tr auth.TokenResponse
+	if err := json.Unmarshal(body, &tr); err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
 	}
 
+	if c.Locals("isWebClient") == true {
+		setAuthCookies(c, cfg, &tr)
+		return c.Status(fiber.StatusOK).JSON(fiber.Map{
+			"message": "Passwordless login confirmed",
+		})
+	}
+
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
-		"message": "Passwordless login confirmed",
-		"access_token": response.AccessToken,
-		"refresh_token": response.RefreshToken,
-		"id_token": response.IDToken,
-		"token_type": response.TokenType,
-		"expires_in": response.ExpiresIn,
+		"message":       "Passwordless login confirmed",
+		"access_token":  tr.AccessToken,
+		"refresh_token": tr.RefreshToken,
+		"id_token":      tr.IDToken,
+		"token_type":    tr.TokenType,
+		"expires_in":    tr.ExpiresIn,
 	})
 }
+
 
 // AuthCallback handles OAuth redirect from Auth0, exchanges the code, and sets httpOnly cookies.
 func AuthCallback(c *fiber.Ctx) error {

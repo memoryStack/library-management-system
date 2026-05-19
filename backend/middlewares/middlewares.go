@@ -39,7 +39,7 @@ func devCORSOrigins() []string {
 // Stack returns middleware for the HTTP API. CORS policy depends on environment.
 func Stack(environment string) []fiber.Handler {
 	var corsMW fiber.Handler
-	corsHeaders := "Origin, Content-Type, Accept, Authorization, X-Request-ID, Cookie"
+	corsHeaders := "Origin, Content-Type, Accept, Authorization, X-Request-ID, X-Client-Type, Cookie"
 	switch environment {
 	case initializers.EnvDevelopment:
 		origins := devCORSOrigins()
@@ -65,6 +65,7 @@ func Stack(environment string) []fiber.Handler {
 			Header:     fiber.HeaderXRequestID,
 			ContextKey: "requestid",
 		}),
+		DetectAuthClient(),
 		corsMW,
 		logger.New(logger.Config{
 			Format: "${time} | ${status} | ${latency} | ${ip} | ${method} ${path} | ${error}\n",
