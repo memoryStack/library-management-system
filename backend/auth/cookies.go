@@ -41,7 +41,8 @@ func SetAuthCookies(c *fiber.Ctx, cfg *Config, tr *TokenResponse) {
 		c.Cookie(&fiber.Cookie{
 			Name:     cfg.RefreshCookieName,
 			Value:    tr.RefreshToken,
-			Path:     cfg.RefreshCookiePath,
+			// Path:     cfg.RefreshCookiePath,
+			Path:     "/",
 			HTTPOnly: true,
 			Secure:   cfg.CookieSecure,
 			SameSite: ss,
