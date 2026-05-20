@@ -24,6 +24,9 @@ func Init(ctx context.Context) error {
 	if err := initJWT(cfg); err != nil {
 		return fmt.Errorf("jwt: %w", err)
 	}
+	if err := initJWTPasswordless(pl); err != nil {
+		return fmt.Errorf("jwt passwordless: %w", err)
+	}
 	_ = ctx
 	return nil
 }

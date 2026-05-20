@@ -17,6 +17,8 @@ import (
 
 	"library-management-system/backend/initializers"
 	"library-management-system/backend/models"
+
+	"gorm.io/gorm"
 )
 
 func cookieSameSite(s string) string {
@@ -123,11 +125,10 @@ func AuthLoginSelfManaged(c *fiber.Ctx) error {
 	}
 
 	resp, err := http.Post(url, "application/json", bytes.NewReader(jsonData))
-	defer resp.Body.Close()
-
 	if err != nil {
-        return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
-    }
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
+	}
+	defer resp.Body.Close()
 
 	_, err = io.ReadAll(resp.Body)
 	if err != nil {
@@ -159,6 +160,7 @@ func AuthConfirmOTP(c *fiber.Ctx) error {
 		"grant_type":    "http://auth0.com/oauth/grant-type/passwordless/otp",
 		"client_id":     cfg.ClientID,
 		"client_secret": cfg.ClientSecret,
+		"audience":      cfg.Audience,
 		"username":      requestBody["username"],
 		"otp":           requestBody["otp"],
 		"realm":         c.Query("medium"),
@@ -189,6 +191,17 @@ func AuthConfirmOTP(c *fiber.Ctx) error {
 	var tr auth.TokenResponse
 	if err := json.Unmarshal(body, &tr); err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
+	}
+
+	fmt.Println("access token: ", tr.AccessToken)
+	fmt.Println("refresh token: ", tr.RefreshToken)
+	fmt.Println("id token: ", tr.IDToken)
+
+	// Persist minimal identity fields by passwordless channel.
+	if tr.IDToken != "" {
+		if _, err := savePasswordlessIdentityFromIDToken(initializers.DB, tr.IDToken, c.Query("medium")); err != nil {
+			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
+		}
 	}
 
 	if c.Locals("isWebClient") == true {
@@ -236,29 +249,10 @@ func AuthCallback(c *fiber.Ctx) error {
 
 	setAuthCookies(c, cfg, tr)
 
-	// save user to database
-	idtoken := tr.IDToken
-	userValues, err := auth.IDTokenClaims(idtoken)
-	if err != nil {
-		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error2": err.Error()})
-	}
-
-	present := initializers.DB.Where("auth0_id = ?", userValues["sub"].(string)).First(&models.User{})
-	if present.Error == nil {
-		// return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "user already exists"})
-		return c.Redirect(cfg.PostLoginRedirect, fiber.StatusFound)
-	}
-
-	result := initializers.DB.Create(&models.User{
-		Name: userValues["name"].(string),
-		Email: userValues["email"].(string),
-		EmailVerified: userValues["email_verified"].(bool),
-		Image: userValues["picture"].(string),
-		Auth0ID: userValues["sub"].(string),
-	})
-
-	if result.Error != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "some error while saving user details"})
+	if tr.IDToken != "" {
+		if _, err := saveUserFromIDToken(initializers.DB, tr.IDToken); err != nil {
+			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
+		}
 	}
 
 	return c.Redirect(cfg.PostLoginRedirect, fiber.StatusFound)
@@ -293,23 +287,182 @@ func AuthLogout(c *fiber.Ctx) error {
 	})
 }
 
-// AuthMe returns the authenticated subject (JWT already validated by middleware).
+// AuthMe returns the authenticated user from the database.
 func AuthMe(c *fiber.Ctx) error {
-	idtoken := auth.AccessTokenFromCtx(c)
-	if idtoken == "" {
-		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": "missing access token"})
-	}
-	userValues, err := auth.IDTokenClaims(idtoken)
+	sub, err := subjectFromAccessToken(c)
 	if err != nil {
 		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": err.Error()})
 	}
 
-	user := models.User{}
-	result := initializers.DB.Where("auth0_id = ?", userValues["sub"].(string)).First(&user)
-	if result.Error != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "some error while getting user details"})
+	var u models.User
+	if err := initializers.DB.Where("auth0_id = ?", sub).First(&u).Error; err != nil {
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{"error": "user not found"})
 	}
-	return c.JSON(fiber.Map{
-		"user": user,
+	return c.JSON(fiber.Map{"user": fiber.Map{
+		"first_name": u.FirstName,
+        "last_name": u.LastName,
+        "email": u.Email,
+        "phone_number": u.PhoneNumber,
+        "email_verified": u.EmailVerified,
+        "image_url": u.Image,
+        "id": u.ID,
+	}})
+}
+
+func subjectFromAccessToken(c *fiber.Ctx) (string, error) {
+	token := auth.AccessTokenFromCtx(c)
+	if token == "" {
+		return "", fmt.Errorf("missing access token")
+	}
+	validated, _, err := auth.ValidateAccessTokenAny(c.UserContext(), token)
+	if err != nil {
+		return "", fmt.Errorf("invalid access token")
+	}
+	sub := strings.TrimSpace(validated.RegisteredClaims.Subject)
+	if sub == "" {
+		return "", fmt.Errorf("missing subject")
+	}
+	return sub, nil
+}
+
+func saveUserFromIDToken(db *gorm.DB, idToken string) (*models.User, error) {
+	claims, err := auth.IDTokenClaims(idToken)
+	if err != nil {
+		return nil, err
+	}
+	u, err := userFromIDTokenClaims(claims)
+	if err != nil {
+		return nil, err
+	}
+	return upsertProfile(db, u.Auth0ID, models.ProfileInput{
+		FirstName:     u.FirstName,
+		LastName:      u.LastName,
+		Email:         u.Email,
+		PhoneNumber:   u.PhoneNumber,
+		Image:         u.Image,
+		EmailVerified: u.EmailVerified,
 	})
+}
+
+func savePasswordlessIdentityFromIDToken(db *gorm.DB, idToken string, medium string) (*models.User, error) {
+	claims, err := auth.IDTokenClaims(idToken)
+	if err != nil {
+		return nil, err
+	}
+	sub := claimString(claims, "sub")
+	if sub == "" {
+		return nil, fmt.Errorf("id_token missing sub")
+	}
+
+	picture := claimString(claims, "picture")
+	email_verified := claimBool(claims, "email_verified")
+
+	email := ""
+	phone := ""
+	switch strings.ToLower(strings.TrimSpace(medium)) {
+		case "sms":
+			phone = claimString(claims, "name")
+		default:
+			email = claimString(claims, "email")
+	}
+
+	var existing models.User
+	err = db.Where("auth0_id = ?", sub).First(&existing).Error
+	if err == gorm.ErrRecordNotFound {
+		row := models.User{
+			Auth0ID:     sub,
+			Email:       strings.TrimSpace(email),
+			PhoneNumber: strings.TrimSpace(phone),
+			Image:       picture,
+			EmailVerified: email_verified,
+		}
+		if err := db.Create(&row).Error; err != nil {
+			return nil, err
+		}
+		return &row, nil
+	}
+	if err != nil {
+		return nil, err
+	}
+
+	if email != "" {
+		existing.Email = strings.TrimSpace(email)
+	}
+	if phone != "" {
+		existing.PhoneNumber = strings.TrimSpace(phone)
+	}
+	if picture != "" {
+		existing.Image = picture
+	}
+	if err := db.Save(&existing).Error; err != nil {
+		return nil, err
+	}
+	return &existing, nil
+}
+
+// this will only work for the email redirection universal flow
+// for self managed, all of this has to be input by user
+func userFromIDTokenClaims(claims map[string]interface{}) (models.User, error) {
+	sub := claimString(claims, "sub")
+	if sub == "" {
+		return models.User{}, fmt.Errorf("id_token missing sub")
+	}
+
+	first := claimString(claims, "given_name")
+	last := claimString(claims, "family_name")
+	if first == "" {
+		first, last = splitName(claimString(claims, "name"))
+	}
+
+	email := claimString(claims, "email")
+	if email == "" {
+		return models.User{}, fmt.Errorf("id_token missing email")
+	}
+
+	return models.User{
+		FirstName:     first,
+		LastName:      last,
+		Email:         email,
+		PhoneNumber:   claimString(claims, "phone_number"),
+		EmailVerified: claimBool(claims, "email_verified"),
+		Image:         claimString(claims, "picture"),
+		Auth0ID:       sub,
+	}, nil
+}
+
+func claimString(claims map[string]interface{}, keys ...string) string {
+	for _, key := range keys {
+		v, ok := claims[key]
+		if !ok || v == nil {
+			continue
+		}
+		if s, ok := v.(string); ok {
+			if s = strings.TrimSpace(s); s != "" {
+				return s
+			}
+		}
+	}
+	return ""
+}
+
+func claimBool(claims map[string]interface{}, key string) bool {
+	v, ok := claims[key]
+	if !ok || v == nil {
+		return false
+	}
+	b, ok := v.(bool)
+	return ok && b
+}
+
+func splitName(full string) (first, last string) {
+	full = strings.TrimSpace(full)
+	if full == "" {
+		return "", ""
+	}
+	parts := strings.SplitN(full, " ", 2)
+	first = parts[0]
+	if len(parts) > 1 {
+		last = strings.TrimSpace(parts[1])
+	}
+	return first, last
 }

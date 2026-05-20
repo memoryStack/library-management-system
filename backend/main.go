@@ -67,6 +67,9 @@ func main() {
 	app.Get("/api/auth/logout", controllers.AuthLogout)
 
 	app.Get("/api/auth/me", middlewares.RequireAuth, controllers.AuthMe)
+	app.Post("/api/auth/profile", middlewares.RequireAuth, controllers.UpsertUserProfile)
+	app.Get("/api/auth/profile-requirements", middlewares.RequireAuth, controllers.ProfileRequirements)
+
 	protected := app.Group("", middlewares.RequireAuth)
 	protected.Get("/book/:id", controllers.GetBook)
 	protected.Get("/books", controllers.GetAllBooks)

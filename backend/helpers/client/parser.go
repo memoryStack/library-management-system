@@ -15,7 +15,7 @@ var (
 // Parser returns a shared UA parser (regex DB embedded in uap-go).
 func Parser() (*uaparser.Parser, error) {
 	parserOnce.Do(func() {
-		parserInst, parserErr = uaparser.NewFromSaved()
+		parserInst, parserErr = uaparser.New()
 	})
 	return parserInst, parserErr
 }

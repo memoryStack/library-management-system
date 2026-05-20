@@ -2,64 +2,48 @@ package middlewares
 
 import (
 	"strings"
-	"fmt"
 
 	"library-management-system/backend/auth"
 
 	"github.com/gofiber/fiber/v2"
-
-	gojwt "gopkg.in/go-jose/go-jose.v2/jwt"
 )
 
-// RequireAuth validates the access JWT (cookie or Authorization: Bearer) on each request.
-// Handlers that need the raw access JWT (e.g. after silent refresh) must use auth.AccessTokenFromCtx
-// because httpOnly cookies on the wire are unchanged until the next browser request.
+// RequireAuth validates access JWT (primary or passwordless app) from Bearer or httpOnly cookie.
 func RequireAuth(c *fiber.Ctx) error {
-	cfg := auth.Conf
-	if cfg == nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "auth not configured"})
-	}
-
-	token := strings.TrimSpace(c.Cookies(cfg.AccessCookieName))
-	if token == "" {
-		h := strings.TrimSpace(c.Get("Authorization"))
-		if len(h) > 7 && strings.EqualFold(h[:7], "bearer ") {
-			token = strings.TrimSpace(h[7:])
-		}
-	}
+	token := auth.AccessTokenFromRequest(c)
 	if token == "" {
 		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": "missing authentication"})
 	}
 
-	validated, err := auth.ValidateAccessToken(c.UserContext(), token)
-	
+	_, cfg, err := auth.ValidateAccessTokenAny(c.UserContext(), token)
 	if err != nil {
-		rt := strings.TrimSpace(c.Cookies(cfg.RefreshCookieName))
+		rt := auth.RefreshTokenFromRequest(c, nil)
 		if rt == "" {
-			fmt.Println("error 2: ", err, gojwt.ErrExpired)
 			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": "invalid or expired token"})
 		}
-		tr, rerr := auth.RefreshTokens(c.UserContext(), cfg, rt)
-		fmt.Println("@@@@@", tr)
-		if rerr != nil {
-			fmt.Println("error 3: ", rerr, gojwt.ErrExpired)
+		var tr *auth.TokenResponse
+		var refreshCfg *auth.Config
+		for _, app := range auth.AuthConfigs() {
+			if strings.TrimSpace(c.Cookies(app.RefreshCookieName)) == "" {
+				continue
+			}
+			tr, err = auth.RefreshTokens(c.UserContext(), app, rt)
+			if err == nil {
+				refreshCfg = app
+				break
+			}
+		}
+		if tr == nil || refreshCfg == nil {
 			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": "invalid or expired token"})
 		}
-		validated, err = auth.ValidateAccessToken(c.UserContext(), tr.AccessToken)
-		if err != nil {
-			fmt.Println("error 4: ", err, gojwt.ErrExpired)
+		if _, err = auth.ValidateAccessTokenForConfig(c.UserContext(), refreshCfg, tr.AccessToken); err != nil {
 			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": "invalid or expired token"})
 		}
-		c.Locals("claims", validated)
-		c.Locals("sub", validated.RegisteredClaims.Subject)
-		c.Locals(auth.AccessTokenCtxKey, strings.TrimSpace(tr.AccessToken))
-		
+		cfg = refreshCfg
 		auth.SetAuthCookies(c, cfg, tr)
-		return c.Next()
+		token = strings.TrimSpace(tr.AccessToken)
 	}
 
-	c.Locals("claims", validated)
-	c.Locals("sub", validated.RegisteredClaims.Subject)
 	c.Locals(auth.AccessTokenCtxKey, token)
 	return c.Next()
 }

@@ -108,19 +108,11 @@ func loadAuth0Config(prefix string) (*Config, error) {
 
 	accessName := strings.TrimSpace(os.Getenv(key("ACCESS_COOKIE_NAME")))
 	if accessName == "" {
-		if prefix == "AUTH0_" {
-			accessName = "access_token"
-		} else {
-			accessName = "access_token_pw"
-		}
+		accessName = "access_token"
 	}
 	refreshName := strings.TrimSpace(os.Getenv(key("REFRESH_COOKIE_NAME")))
 	if refreshName == "" {
-		if prefix == "AUTH0_" {
-			refreshName = "refresh_token"
-		} else {
-			refreshName = "refresh_token_pw"
-		}
+		refreshName = "refresh_token"
 	}
 	stateName := strings.TrimSpace(os.Getenv(key("STATE_COOKIE_NAME")))
 	if stateName == "" {
